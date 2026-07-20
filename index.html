@@ -54,7 +54,7 @@ nav button:focus-visible{outline:2px solid var(--cream);outline-offset:2px}
 #home{
   padding-top:0;
   min-height:100vh;
-  background:url('https://img.wattpad.com/8202f0dcc2517404939c97532f73d1e517a7b75d/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f776174747061642d6d656469612d736572766963652f53746f7279496d6167652f78683777674544344852623247773d3d2d3732373831353736342e31366363616532623835346461316161363434393136323134372e676966') center/cover no-repeat;
+  background:url('hero-home.gif') center/cover no-repeat, var(--olive);
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   text-align:center;position:relative;gap:34px;padding:24px;
 }
@@ -120,12 +120,6 @@ section{padding:44px 0}
 }
 @keyframes desce{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
 @media (prefers-reduced-motion:reduce){.desce{animation:none}}
-.video-hint{
-  display:inline-block;margin-top:22px;
-  border:2px dashed rgba(253,246,234,.55);border-radius:99px;
-  padding:6px 18px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;
-  color:rgba(253,246,234,.75);
-}
 .city-hero h2{
   font-family:var(--display);font-weight:700;
   color:var(--gold);
@@ -150,6 +144,36 @@ h3.titulo{
   color:var(--olive);
 }
 .dark h3.titulo{color:var(--gold)}
+.gold-bg h3.titulo{color:var(--cream)}
+
+/* ---------- PAINEL HOSTEL ---------- */
+.painel-hostel{
+  background:var(--olive);color:var(--cream);
+  min-height:100vh;min-height:100svh;
+  display:flex;align-items:center;
+  padding:64px 0;
+}
+.painel-hostel .titulo-hostel{text-align:left}
+.painel-hostel .titulo-hostel a{
+  color:var(--cream);text-decoration:none;
+  border-bottom:2px dashed rgba(253,246,234,.5);
+  padding-bottom:2px;transition:opacity .15s;
+  display:inline-flex;align-items:center;gap:10px;
+}
+.painel-hostel .titulo-hostel a:hover{opacity:.85}
+.painel-hostel .titulo-hostel a:focus-visible{outline:2px solid var(--gold);outline-offset:4px}
+.pin{width:.95em;height:.95em;flex:none}
+.hostel-info p{margin-bottom:8px;font-size:14px;font-weight:300}
+.hostel-info p strong{font-weight:600;color:var(--cream)}
+.foto-hostel{
+  display:block;width:100%;margin-top:26px;
+  border-radius:20px;
+  aspect-ratio:4/3;object-fit:cover;
+}
+@media (min-width:640px){
+  .painel-hostel{min-height:0;padding:80px 0}
+  .foto-hostel{aspect-ratio:16/9}
+}
 
 /* ---------- CARDS ---------- */
 .card{
@@ -165,12 +189,17 @@ h3.titulo{
 .card p{margin-bottom:8px;font-size:14px;font-weight:300}
 .card p strong{font-weight:600;color:var(--gold)}
 
-/* cards amarelos (comidas, transporte, resolver) */
-.card.amarelo{background:var(--gold);color:var(--cream)}
-.card.amarelo h4{color:var(--cream)}
-.card.amarelo p{font-weight:400}
-.card.amarelo p strong{color:var(--cream);font-weight:700}
-.card.amarelo a{color:var(--cream);font-weight:600}
+/* botão do total da viagem */
+.btn-total{
+  display:inline-block;
+  background:var(--gold);color:var(--olive);
+  font-weight:700;font-size:14px;
+  padding:12px 26px;border-radius:99px;
+  text-decoration:none;
+  transition:transform .15s;
+}
+.btn-total:hover{transform:scale(1.04)}
+.btn-total:focus-visible{outline:2px solid var(--cream);outline-offset:3px}
 
 .tag{
   display:inline-block;background:var(--gold);color:var(--olive);
@@ -181,46 +210,61 @@ h3.titulo{
 a.tag:hover{transform:scale(1.06)}
 a.tag:focus-visible{outline:2px solid var(--cream);outline-offset:2px}
 
-/* ---------- COMIDAS: acordeão ---------- */
-.food{margin-bottom:10px}
+/* ---------- COMIDAS: cards com foto ---------- */
+.foods{display:flex;flex-direction:column;gap:14px}
+.food{
+  border:1.5px solid var(--gold);border-radius:18px;
+  overflow:hidden;background:var(--olive);
+}
+.food img{
+  display:block;width:100%;height:150px;object-fit:cover;
+}
 .food > button{
   width:100%;
-  font-family:var(--body);font-size:14px;font-weight:500;
-  background:var(--cream);color:var(--olive);
-  border:none;border-radius:18px;
-  padding:12px 20px;cursor:pointer;
+  font-family:var(--display);font-size:15px;font-weight:700;
+  letter-spacing:.04em;
+  background:transparent;color:var(--cream);
+  border:none;
+  padding:14px 18px;cursor:pointer;
   display:flex;justify-content:space-between;align-items:center;
-  transition:border-radius .2s;
+  text-align:left;
 }
-.food.open > button{border-radius:18px 18px 0 0}
-.food > button:focus-visible{outline:2px solid var(--olive);outline-offset:2px}
-.food > button .seta{color:var(--brown);font-weight:600;transition:transform .25s}
+.food > button:focus-visible{outline:2px solid var(--gold);outline-offset:-4px}
+.food > button .seta{color:var(--gold);font-weight:700;transition:transform .25s}
 .food.open > button .seta{transform:rotate(90deg)}
 .food .desc{
   display:none;
-  background:var(--olive);color:var(--cream);
-  border-radius:0 0 18px 18px;
-  padding:14px 20px;font-size:13px;font-weight:300;
+  color:var(--cream);
+  border-top:1px dashed rgba(218,154,68,.5);
+  padding:14px 18px;font-size:13px;font-weight:300;
 }
 .food.open .desc{display:block}
+@media (min-width:640px){
+  .foods{display:grid;grid-template-columns:1fr 1fr;align-items:start}
+}
 
 /* ---------- RESOLVER checklist ---------- */
 .check{
-  display:flex;gap:12px;align-items:flex-start;
-  background:rgba(74,68,31,.14);
-  border-radius:14px;padding:12px 14px;margin-bottom:10px;
+  display:flex;gap:14px;align-items:flex-start;
+  background:rgba(253,246,234,.06);
+  border:1px solid rgba(218,154,68,.35);
+  border-radius:16px;padding:14px 16px;margin-bottom:10px;
   cursor:pointer;color:var(--cream);
+  transition:border-color .2s, background .2s;
 }
+.check:hover{border-color:var(--gold)}
 .check .box{
-  flex:none;width:20px;height:20px;margin-top:2px;
-  border:2px solid var(--cream);border-radius:6px;
+  flex:none;width:24px;height:24px;margin-top:1px;
+  border:2px solid var(--gold);border-radius:50%;
   display:grid;place-items:center;
   color:var(--gold);font-size:13px;font-weight:700;
   transition:.2s;
 }
-.check.done .box{background:var(--cream)}
+.check.done{background:rgba(218,154,68,.12)}
+.check.done .box{background:var(--gold);color:var(--olive)}
 .check.done .txt{opacity:.55;text-decoration:line-through}
-.check .txt{font-size:14px}
+.check .txt{font-size:14px;font-weight:300}
+.check .txt strong{color:var(--gold);font-weight:600}
 
 /* ---------- ITINERÁRIO ---------- */
 .day{
@@ -284,17 +328,32 @@ a.tag:focus-visible{outline:2px solid var(--cream);outline-offset:2px}
 .placeholder{
   min-height:calc(100vh - 52px);
   display:flex;flex-direction:column;align-items:center;justify-content:center;
-  text-align:center;gap:14px;padding:24px;
+  text-align:center;gap:18px;padding:24px;
 }
 .placeholder h2{
   font-family:var(--display);font-weight:700;
   color:var(--gold);font-size:clamp(2rem,9vw,3.4rem);letter-spacing:.08em;
 }
 .placeholder p{color:var(--brown);font-size:14px}
-.placeholder .em-breve{
-  border:2px dashed var(--gold);border-radius:99px;
-  padding:8px 22px;font-size:13px;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--brown);
+.loading-bar{
+  width:180px;height:6px;border-radius:99px;
+  background:rgba(147,102,55,.25);
+  overflow:hidden;position:relative;
+}
+.loading-bar::after{
+  content:'';position:absolute;top:0;bottom:0;left:-40%;width:40%;
+  background:var(--gold);border-radius:99px;
+  animation:carrega 1.6s ease-in-out infinite;
+}
+@keyframes carrega{0%{left:-40%}100%{left:100%}}
+.loading-dots::after{
+  content:'';display:inline-block;width:1.2em;text-align:left;
+  animation:pontos 1.5s steps(4,end) infinite;
+}
+@keyframes pontos{0%{content:''}25%{content:'.'}50%{content:'..'}75%{content:'...'}}
+@media (prefers-reduced-motion:reduce){
+  .loading-bar::after{animation:none;left:0;width:60%}
+  .loading-dots::after{animation:none;content:'...'}
 }
 
 footer{
@@ -334,85 +393,94 @@ footer{
 <div class="page" id="edimburgo">
 
   <div class="city-hero">
-    <!-- VÍDEO DE FUNDO: quando tiver o vídeo, descomente a linha do <source>
-         e troque "SEU-VIDEO.mp4" pelo caminho do arquivo (ex: videos/scotland.mp4) -->
-    <video class="hero-video" autoplay muted loop playsinline poster="">
-      <!-- <source src="SEU-VIDEO.mp4" type="video/mp4"> -->
+    <!-- VÍDEO DE FUNDO: versão mobile em telas pequenas, versão web nas maiores -->
+    <video class="hero-video" autoplay muted loop playsinline>
+      <source src="hero%20edimburgo%20-%20mobile.mp4" type="video/mp4" media="(max-width: 639px)">
+      <source src="hero%20edimburgo%20-%20web.mp4" type="video/mp4">
     </video>
     <div class="hero-conteudo">
       <h2>Scotland</h2>
       <p>25 a 28 de setembro de 2026</p>
-      <div class="video-hint">🎬 vídeo aqui em breve</div>
     </div>
     <div class="desce">↓</div>
   </div>
-  <div class="scallop"></div>
 
-  <!-- HOSTEL -->
-  <section class="wrap">
-    <h3 class="titulo">Safestay Cowgate</h3>
-    <div class="card">
-      <p><strong>📍 116 Cowgate, Edinburgh EH1 1JN, UK</strong></p>
-      <p><strong>Check-in 15h | Check-out 11h</strong> · Recepção 24h/7</p>
-      <p>🍴 Não tem cozinha compartilhada. Levar talheres!</p>
-      <p>💨 Tem secador de cabelo na recepção.</p>
-      <p>🌧️ Escócia pode chover a qualquer momento. Capa de chuva?</p>
-      <p style="margin-top:12px"><strong>Mercados próximos:</strong></p>
-      <div>
-        <a class="tag" href="https://maps.google.com/?q=Lidl+near+116+Cowgate+Edinburgh" target="_blank" rel="noopener">Lidl</a><a class="tag" href="https://maps.google.com/?q=Sainsburys+near+116+Cowgate+Edinburgh" target="_blank" rel="noopener">Sainsbury's</a><a class="tag" href="https://maps.google.com/?q=M%26S+Food+near+116+Cowgate+Edinburgh" target="_blank" rel="noopener">M&amp;S Food</a><a class="tag" href="https://maps.google.com/?q=Tesco+near+116+Cowgate+Edinburgh" target="_blank" rel="noopener">Tesco</a>
+  <!-- HOSTEL: painel verde-oliva de tela cheia -->
+  <section class="painel-hostel">
+    <div class="wrap">
+      <h3 class="titulo titulo-hostel"><a href="https://maps.google.com/?q=Safestay+Edinburgh+Cowgate,+116+Cowgate,+Edinburgh+EH1+1JN" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 512 512" aria-hidden="true"><circle cx="256" cy="256" r="256" fill="#da9a44"/><path d="M256 100c-66 0-114 50-114 114 0 84 114 198 114 198s114-114 114-198c0-64-48-114-114-114z" fill="#fdf6ea"/><circle cx="256" cy="214" r="46" fill="#da9a44"/></svg>Safestay Cowgate</a></h3>
+      <div class="hostel-info">
+        <p>116 Cowgate, Edinburgh EH1 1JN, UK</p>
+        <p><strong>Check-in 15h | Check-out 11h</strong> · Recepção 24h/7</p>
+        <p style="margin-top:20px">🍴 Não tem cozinha compartilhada. Levar talheres!</p>
+        <p>💨 Tem secador de cabelo na recepção.</p>
+        <p>🌧️ Escócia pode chover a qualquer momento. Capa de chuva?</p>
+        <p style="margin-top:20px"><strong>Mercados próximos:</strong></p>
+        <div>
+          <a class="tag" href="https://maps.google.com/?q=Lidl+near+116+Cowgate+Edinburgh" target="_blank" rel="noopener">Lidl</a><a class="tag" href="https://maps.google.com/?q=Sainsburys+near+116+Cowgate+Edinburgh" target="_blank" rel="noopener">Sainsbury's</a><a class="tag" href="https://maps.google.com/?q=M%26S+Food+near+116+Cowgate+Edinburgh" target="_blank" rel="noopener">M&amp;S Food</a><a class="tag" href="https://maps.google.com/?q=Tesco+near+116+Cowgate+Edinburgh" target="_blank" rel="noopener">Tesco</a>
+        </div>
       </div>
+      <img class="foto-hostel" src="Safestay-Cowgate.jpg" alt="Safestay Cowgate" onerror="this.style.display='none'">
     </div>
   </section>
 
-  <!-- MUST KNOW -->
-  <div class="scallop gold" style="transform:scaleY(-1)"></div>
-  <section class="dark" style="background:var(--olive)">
+  <!-- MUST KNOW: fundo amarelo, cards verdes -->
+  <div class="scallop gold" style="transform:scaleY(-1);background-color:var(--olive)"></div>
+  <section class="gold-bg" style="background:var(--gold)">
     <div class="wrap">
       <h3 class="titulo">Must know</h3>
 
-      <!-- comidas: acordeão -->
-      <div class="card amarelo">
-        <h4>Comidas típicas</h4>
-        <div class="food">
-          <button>Vegan Haggis <span class="seta">›</span></button>
-          <div class="desc">O prato mais famoso! A versão vegan é feita com ervilhas. O original é ovelha com aveia. Acompanha "Neeps and tatties", que é purê de rutabaga (nabo) e purê de batatas.</div>
-        </div>
-        <div class="food">
-          <button>Porridge <span class="seta">›</span></button>
-          <div class="desc">Isso é mingau, mas é bem famoso lá. Será que é diferente? kk</div>
-        </div>
-        <div class="food">
-          <button>Shortbread <span class="seta">›</span></button>
-          <div class="desc">Restos de massa de pão adoçados. Manteiga e açúcar, é bem natalino e doce de casamento.</div>
-        </div>
-        <div class="food">
-          <button>Cranachan <span class="seta">›</span></button>
-          <div class="desc">Framboesas com crowdie (um queijo fresco escocês), aveia, mel e whisky.</div>
-        </div>
-        <div class="food">
-          <button>Scotch Pie <span class="seta">›</span></button>
-          <div class="desc">A verdadeira é com carne, mas tem versões vegan com soja.</div>
-        </div>
-        <div class="food">
-          <button>Stovies <span class="seta">›</span></button>
-          <div class="desc">Batata, cebola e, em vez de restos de carne assada, cogumelos, salsichas vegetais ou lentilhas. É comida de tacho, aceita tudo.</div>
+      <!-- comidas: cards com foto -->
+      <div class="card">
+        <h4>🍽️ Comidas típicas</h4>
+        <div class="foods">
+          <div class="food">
+            <img src="vegan-haggis.jpg" alt="Vegan Haggis" onerror="this.style.display='none'">
+            <button>Vegan Haggis <span class="seta">›</span></button>
+            <div class="desc">O prato mais famoso! A versão vegan é feita com ervilhas. O original é ovelha com aveia. Acompanha "Neeps and tatties", que é purê de rutabaga (nabo) e purê de batatas.</div>
+          </div>
+          <div class="food">
+            <img src="scottish-porridge.jpg" alt="Porridge" onerror="this.style.display='none'">
+            <button>Porridge <span class="seta">›</span></button>
+            <div class="desc">Isso é mingau, mas é bem famoso lá. Será que é diferente? kk</div>
+          </div>
+          <div class="food">
+            <img src="Shortbread.jpg" alt="Shortbread" onerror="this.style.display='none'">
+            <button>Shortbread <span class="seta">›</span></button>
+            <div class="desc">Restos de massa de pão adoçados. Manteiga e açúcar, é bem natalino e doce de casamento.</div>
+          </div>
+          <div class="food">
+            <img src="Cranachan.jpg" alt="Cranachan" onerror="this.style.display='none'">
+            <button>Cranachan <span class="seta">›</span></button>
+            <div class="desc">Framboesas com crowdie (um queijo fresco escocês), aveia, mel e whisky.</div>
+          </div>
+          <div class="food">
+            <img src="scotch-pie.jpeg" alt="Scotch Pie" onerror="this.style.display='none'">
+            <button>Scotch Pie <span class="seta">›</span></button>
+            <div class="desc">A verdadeira é com carne, mas tem versões vegan com soja.</div>
+          </div>
+          <div class="food">
+            <img src="stovies.jpg" alt="Stovies" onerror="this.style.display='none'">
+            <button>Stovies <span class="seta">›</span></button>
+            <div class="desc">Batata, cebola e, em vez de restos de carne assada, cogumelos, salsichas vegetais ou lentilhas. É comida de tacho, aceita tudo.</div>
+          </div>
         </div>
       </div>
 
       <!-- transporte -->
-      <div class="card amarelo">
-        <h4>Transporte</h4>
-        <p><strong>Ônibus urbano (Lothian):</strong> £2,20 por viagem no cartão por aproximação. Usando o mesmo cartão o dia todo, o teto diário é ~£5 automático. Não precisa comprar bilhete.</p>
+      <div class="card">
+        <h4>🚌 Transporte</h4>
+        <p><strong>Ônibus urbano (Lothian):</strong> £2,20 por viagem no cartão por aproximação. Usando o mesmo cartão o dia todo, o teto diário é ~£5 automático. <u>Não precisa comprar bilhete.</u></p>
         <p><strong>Aeroporto ↔ centro:</strong> Airlink 100, roda 24h, ~30 min até Waverley Bridge // é a última parada (7 min a pé do hostel).</p>
         <p><strong>Volta (29/09, 4h da manhã):</strong> Airlink 24h.</p>
         <p><strong>Queensferry:</strong> trem Haymarket → Dalmeny, ~20 min, ~£5 a 7 ida e volta, + 15 min a pé ladeira abaixo.</p>
         <p><strong>Craigmillar:</strong> ônibus ~20 a 25 min da região da North Bridge + 10 min a pé.</p>
         <p><strong>O resto:</strong> 45 km a pé =D</p>
-        <p style="text-align:center;margin-top:14px;font-weight:600">🥨 +/- £20</p>
+        <p style="text-align:center;margin-top:16px"><a class="btn-total" href="https://docs.google.com/spreadsheets/d/1e-H8fAe48Zp1NgKDvl8reH3uWgvau4gWUM8XcMbjdB4/edit?usp=sharing" target="_blank" rel="noopener">Total da viagem: £20/£25</a></p>
       </div>
 
       <!-- resolver -->
-      <div class="card amarelo">
+      <div class="card">
         <h4>🧙 Resolver</h4>
         <div class="check"><div class="box">✓</div><div class="txt"><strong>31/07:</strong> sai a programação do Doors Open Days. Conferir se o Carlowrie Castle (ou outros lugares fechados e pagos) abre no fim de semana 26 e 27.</div></div>
         <div class="check"><div class="box">✓</div><div class="txt">Escolher qual dos dois pub crawls e decidir a noite lá: sexta ou sábado.</div></div>
@@ -421,7 +489,7 @@ footer{
       </div>
     </div>
   </section>
-  <div class="scallop"></div>
+  <div class="scallop gold" style="background-color:var(--cream)"></div>
 
   <!-- ITINERÁRIO -->
   <section class="wrap">
@@ -540,8 +608,8 @@ footer{
 <div class="page" id="londres">
   <div class="placeholder">
     <h2>London</h2>
-    <p>O roteiro de Londres ainda está no caldeirão…</p>
-    <div class="em-breve">Em breve</div>
+    <p class="loading-dots">Carregando o roteiro de Londres</p>
+    <div class="loading-bar"></div>
   </div>
 </div>
 
@@ -549,8 +617,8 @@ footer{
 <div class="page" id="paris">
   <div class="placeholder">
     <h2>Paris</h2>
-    <p>O roteiro de Paris ainda está no caldeirão…</p>
-    <div class="em-breve">Em breve</div>
+    <p class="loading-dots">Carregando o roteiro de Paris</p>
+    <div class="loading-bar"></div>
   </div>
 </div>
 
