@@ -122,8 +122,8 @@ section{padding:44px 0}
 @media (prefers-reduced-motion:reduce){.desce{animation:none}}
 .city-hero h2{
   font-family:var(--display);font-weight:700;
-  color:var(--gold);
-  font-size:clamp(2.4rem,10vw,4rem);
+  color:var(--cream);
+  font-size:clamp(3.2rem,15vw,6rem);
   letter-spacing:.08em;
 }
 .city-hero p{margin-top:10px;font-size:14px;letter-spacing:.14em;text-transform:uppercase}
@@ -266,6 +266,22 @@ a.tag:focus-visible{outline:2px solid var(--cream);outline-offset:2px}
 .check .txt{font-size:14px;font-weight:300}
 .check .txt strong{color:var(--gold);font-weight:600}
 
+/* pílulas de escolha dentro do Resolver */
+.opcoes{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.opcao{
+  display:inline-flex;align-items:center;gap:8px;
+  border:1.5px solid var(--gold);border-radius:99px;
+  padding:6px 14px;font-size:13px;
+  color:var(--cream);cursor:pointer;
+  transition:background .15s, color .15s;
+}
+.opcao a{
+  color:var(--gold);text-decoration:none;font-weight:700;
+  padding:0 2px;
+}
+.opcao.sel{background:var(--gold);color:var(--olive);font-weight:600}
+.opcao.sel a{color:var(--olive)}
+
 /* ---------- ITINERÁRIO ---------- */
 .day{
   border:2px solid var(--olive);border-radius:20px;
@@ -322,7 +338,36 @@ a.tag:focus-visible{outline:2px solid var(--cream);outline-offset:2px}
 .stop.done .info{opacity:.5}
 .stop.done .oq{text-decoration:line-through}
 .stop .oq{font-weight:600;font-size:14px}
+.stop .oq a{
+  color:inherit;
+  text-decoration:underline;
+  text-decoration-style:dotted;
+  text-decoration-color:var(--gold);
+  text-underline-offset:3px;
+}
 .stop .nota{font-size:13px;font-weight:300;color:var(--brown)}
+
+/* pergunta no meio do roteiro */
+.check.pergunta{
+  background:rgba(218,154,68,.12);
+  border:1.5px dashed var(--gold);
+  color:var(--olive);
+  margin:8px 0 4px;
+}
+.check.pergunta .txt{font-weight:500}
+.check.pergunta .box{border-color:var(--brown);color:var(--brown)}
+.check.pergunta:hover{border-color:var(--brown)}
+.check.pergunta.done{background:rgba(218,154,68,.22)}
+.check.pergunta.done .box{background:var(--brown);color:var(--cream)}
+
+/* custo estimado do dia */
+.custo{
+  margin-top:16px;text-align:center;
+  font-size:13px;font-weight:600;color:var(--brown);
+  background:rgba(218,154,68,.15);
+  border:1px solid rgba(218,154,68,.4);
+  border-radius:99px;padding:9px 16px;
+}
 
 /* ---------- PLACEHOLDER ---------- */
 .placeholder{
@@ -476,15 +521,25 @@ footer{
         <p><strong>Queensferry:</strong> trem Haymarket → Dalmeny, ~20 min, ~£5 a 7 ida e volta, + 15 min a pé ladeira abaixo.</p>
         <p><strong>Craigmillar:</strong> ônibus ~20 a 25 min da região da North Bridge + 10 min a pé.</p>
         <p><strong>O resto:</strong> 45 km a pé =D</p>
-        <p style="text-align:center;margin-top:16px"><a class="btn-total" href="https://docs.google.com/spreadsheets/d/1e-H8fAe48Zp1NgKDvl8reH3uWgvau4gWUM8XcMbjdB4/edit?usp=sharing" target="_blank" rel="noopener">Total da viagem: £20/£25</a></p>
+        <p style="text-align:center;margin-top:16px"><a class="btn-total" href="https://docs.google.com/spreadsheets/d/1e-H8fAe48Zp1NgKDvl8reH3uWgvau4gWUM8XcMbjdB4/edit?usp=sharing" target="_blank" rel="noopener">Total em transportes: £20/£25</a></p>
       </div>
 
       <!-- resolver -->
       <div class="card">
         <h4>🧙 Resolver</h4>
         <div class="check"><div class="box">✓</div><div class="txt"><strong>31/07:</strong> sai a programação do Doors Open Days. Conferir se o Carlowrie Castle (ou outros lugares fechados e pagos) abre no fim de semana 26 e 27.</div></div>
-        <div class="check"><div class="box">✓</div><div class="txt">Escolher qual dos dois pub crawls e decidir a noite lá: sexta ou sábado.</div></div>
-        <div class="check"><div class="box">✓</div><div class="txt">Vamos em algum tour noturno ou no bus? Escolher entre um ou outro.</div></div>
+        <div class="check"><div class="box">✓</div><div class="txt">Escolher qual dos dois pub crawls e decidir a noite lá: sexta ou sábado.
+          <span class="opcoes" data-group="pubcrawl">
+            <span class="opcao" data-op="7bares"><span>7 bares + 1 discoteca</span><a href="https://www.getyourguide.com/edimburgo-l44/edimburgo-a-melhor-festa-de-pub-crawl-com-7-bares-e-1-discoteca-t967124/?ranking_uuid=da9c2497-e9c1-4a6d-b566-db534339abef&amp;referral_redirect=1" target="_blank" rel="noopener">↗</a></span>
+            <span class="opcao" data-op="original"><span>O original</span><a href="https://www.getyourguide.com/edimburgo-l44/o-pub-crawl-original-de-edimburgo-t406992/?ranking_uuid=da9c2497-e9c1-4a6d-b566-db534339abef&amp;referral_redirect=1" target="_blank" rel="noopener">↗</a></span>
+          </span>
+        </div></div>
+        <div class="check"><div class="box">✓</div><div class="txt">Vamos em algum tour noturno ou no bus? Escolher entre um ou outro.
+          <span class="opcoes" data-group="tournoturno">
+            <span class="opcao" data-op="underground"><span>O Tour Fantasma Subterrâneo · €22,39</span><a href="https://www.booking.com/attractions/gb/prwhxfza2doj-the-underground-ghost-tour.en-gb.html?start_date=2026-09-26&amp;end_date=2026-09-26&amp;source=searchresults-product-card&amp;date=2026-09-26&amp;aid=2399994&amp;ufi=-2595386&amp;timeslot=ATS-PRwhXFZA2DOj-202609261745-nullnull&amp;ticket_type=OFOR8wdElfZr" target="_blank" rel="noopener">↗</a></span>
+            <span class="opcao" data-op="ghostbus"><span>The ghost bus tour · £24</span><a href="https://www.getyourguide.com/pt-br/iorque-l436/espetaculo-de-comedia-de-terror-york-excursao-mal-assombrada-de-onibus-t48586/?ranking_uuid=ad914fcd-11d5-4ab9-9202-829465d5ffae" target="_blank" rel="noopener">↗</a></span>
+          </span>
+        </div></div>
         <div class="check"><div class="box">✓</div><div class="txt">Conferir se deixar as malas no hostel antes do check-in é pago.</div></div>
       </div>
     </div>
@@ -506,21 +561,24 @@ footer{
         <p class="intro">Chegada de madrugada no aeroporto → Airlink até o centro → malas no hostel → cidade velha inteira a pé.</p>
 
         <p class="periodo">Início da manhã</p>
-        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq">Safestay Cowgate</div><div class="nota">Deixar as malas (check-in 15h) // vou conferir se é pago</div></div></div>
-        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq">Royal Mile + St Giles' Cathedral</div><div class="nota">A catedral é grátis (doação) // vitrais e teto azul</div></div></div>
-        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq">Edinburgh Castle</div><div class="nota">Ver por fora; se for entrar, £27</div></div></div>
+        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq"><a href="https://maps.google.com/?q=Safestay+Edinburgh+Cowgate" target="_blank" rel="noopener">Safestay Cowgate</a></div><div class="nota">Deixar as malas (check-in 15h) // vou conferir se é pago</div></div></div>
+        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq"><a href="https://maps.google.com/?q=St+Giles+Cathedral+Edinburgh" target="_blank" rel="noopener">Royal Mile + St Giles' Cathedral</a></div><div class="nota">A catedral é grátis (doação) // vitrais e teto azul</div></div></div>
+        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq"><a href="https://maps.google.com/?q=Edinburgh+Castle" target="_blank" rel="noopener">Edinburgh Castle</a></div><div class="nota">Ver por fora; se for entrar, £27</div></div></div>
 
         <p class="periodo">Meio-dia</p>
-        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq">Vennel Viewpoint + almoço no Grassmarket</div><div class="nota">A escadinha com A foto do castelo</div></div></div>
-        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq">Victoria Street + Jogo HP ⚡</div><div class="nota">O Beco Diagonal: começar o jogo de exploração por aqui</div></div></div>
+        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq"><a href="https://maps.google.com/?q=The+Vennel+Viewpoint+Edinburgh" target="_blank" rel="noopener">Vennel Viewpoint + almoço no Grassmarket</a></div><div class="nota">A escadinha com A foto do castelo</div></div></div>
+        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq"><a href="https://maps.google.com/?q=Victoria+Street+Edinburgh" target="_blank" rel="noopener">Victoria Street + Jogo HP ⚡</a></div><div class="nota">O Beco Diagonal: começar o jogo de exploração por aqui</div></div></div>
+        <div class="check pergunta"><div class="box">✓</div><div class="txt">Jogo do HP: €9,99. Fazemos??</div></div>
 
         <p class="periodo">Fim da tarde</p>
-        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq">The Elephant House</div><div class="nota">Butterbeer + shortbread. Fecha 18h.</div></div></div>
-        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq">Greyfriars Kirkyard <em>(plano B: Museu Nacional)</em></div><div class="nota">Túmulo de Tom Riddell + mausoléu do Bloody Mackenzie. Se chover: Museu Nacional ao lado, grátis, com terraço.</div></div></div>
+        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq"><a href="https://maps.google.com/?q=The+Elephant+House+Edinburgh" target="_blank" rel="noopener">The Elephant House</a></div><div class="nota">Butterbeer + shortbread. Fecha 18h.</div></div></div>
+        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq"><a href="https://maps.google.com/?q=Greyfriars+Kirkyard+Edinburgh" target="_blank" rel="noopener">Greyfriars Kirkyard</a> <em>(plano B: Museu Nacional)</em></div><div class="nota">Túmulo de Tom Riddell + mausoléu do Bloody Mackenzie. Se chover: Museu Nacional ao lado, grátis, com terraço.</div></div></div>
 
         <p class="periodo">Noite</p>
-        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq">The Three Sisters</div><div class="nota">Jantar (pizza £7,50) em frente ao hostel, e já é bar</div></div></div>
-        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq">Cabaret Voltaire ou pub crawl</div><div class="nota">Balada subterrânea a 2 min. Só abre sex e sáb, e hoje é dia!</div></div></div>
+        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq"><a href="https://maps.google.com/?q=The+Three+Sisters+Cowgate+Edinburgh" target="_blank" rel="noopener">The Three Sisters</a></div><div class="nota">Jantar (pizza £7,50) em frente ao hostel, e já é bar</div></div></div>
+        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq"><a href="https://maps.google.com/?q=Cabaret+Voltaire+Edinburgh" target="_blank" rel="noopener">Cabaret Voltaire</a> ou pub crawl</div><div class="nota">Balada subterrânea a 2 min. Só abre sex e sáb, e hoje é dia!</div></div></div>
+
+        <p class="custo">💰 Dia: ~£40 a 45 (almoço + Elephant House + pizza + entrada e bebidas na balada) · extras: castelo £27 e jogo HP €9,99 se rolar</p>
       </div>
     </div>
 
@@ -535,14 +593,16 @@ footer{
         <p class="intro">Viaduto do Expresso de Hogwarts, Glencoe, Rannoch Moor. Levar lanche e casaco!</p>
 
         <p class="periodo">Início da manhã</p>
-        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq">Saída do tour</div><div class="nota">Ponto de encontro vem na confirmação da reserva</div></div></div>
+        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq"><a href="https://www.booking.com/attractions/gb/pro0nn2jccfo-1-day-glenfinnan-glencoe-and-scottish-highlands.en-gb.html?start_date=2026-09-26&amp;end_date=2026-09-26&amp;source=searchresults-pinned-product-card&amp;date=2026-09-26&amp;aid=2399994&amp;ufi=-2595386&amp;timeslot=ATS-PRo0nN2jCCFo-202609260700-202609261900&amp;ticket_type=OF2DzJzRsVFy" target="_blank" rel="noopener">Saída do tour: Glenfinnan, Glencoe and Scottish Highlands</a></div><div class="nota">Comprar no link! Ponto de encontro vem na confirmação da reserva</div></div></div>
 
         <p class="periodo">Meio-dia</p>
-        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq">Glenfinnan Viaduct</div><div class="nota">Se os horários baterem, o trem a vapor cruza o viaduto. Dedos cruzados 🤞</div></div></div>
+        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq"><a href="https://maps.google.com/?q=Glenfinnan+Viaduct" target="_blank" rel="noopener">Glenfinnan Viaduct</a></div><div class="nota">Se os horários baterem, o trem a vapor cruza o viaduto. Dedos cruzados 🤞</div></div></div>
 
         <p class="periodo">Noite</p>
-        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq">Volta a Edimburgo</div><div class="nota">Jantar tranquilo perto do hostel</div></div></div>
-        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq">Whistlebinkies ou pub crawl / Cabaret</div><div class="nota">Rockzinho ao vivo a 3 min do hostel: energia baixa, cerveja e música</div></div></div>
+        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq">Volta a Edimburgo</div><div class="nota">Jantar qualquer coisa do mercado</div></div></div>
+        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq"><a href="https://maps.google.com/?q=Whistlebinkies+Edinburgh" target="_blank" rel="noopener">Whistlebinkies</a> ou pub crawl / Cabaret</div><div class="nota">Rockzinho ao vivo no Whistlebinkies · Pub crawl se for o dia · ou Cabaret = balada subterrânea (ver valores). Depende do cansaço!</div></div></div>
+
+        <p class="custo">💰 Dia: ~£20 (lanche + jantar do mercado + noite) + o valor do tour</p>
       </div>
     </div>
 
@@ -554,17 +614,20 @@ footer{
         <span class="seta">▾</span>
       </button>
       <div class="corpo">
-        <p class="intro">Manhã de lago, ruínas e jardim secreto; tarde de castelo medieval; noite embaixo da terra.</p>
+        <p class="intro">Manhã de lago, ruínas e jardim secreto; tarde de castelo medieval; noite rolê subsolo??</p>
 
         <p class="periodo">Início da manhã</p>
-        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq">St Margaret's Loch + ruínas da St Anthony's Chapel</div><div class="nota">Lago com cisnes + subidinha leve. A vibe do vulcão sem a trilha inteira, mas o cume do Arthur's Seat sai daqui, se bater disposição.</div></div></div>
-        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq">Dr Neil's Garden + Duddingston</div><div class="nota">Jardim secreto à beira do lago (entrada pela Old Church Lane). Sheep Heid Inn, o pub mais antigo da Escócia, fica ao lado.</div></div></div>
+        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq"><a href="https://maps.google.com/?q=St+Margarets+Loch+Edinburgh" target="_blank" rel="noopener">St Margaret's Loch + ruínas da St Anthony's Chapel</a></div><div class="nota">Lago com cisnes + subidinha leve. É um caminho para o vulcão, mas não sou doida de fazer trilha de duas horas, então dá pra ver o Arthur's Seat desse lugar.</div></div></div>
+        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq"><a href="https://maps.google.com/?q=Dr+Neils+Garden+Edinburgh" target="_blank" rel="noopener">Dr Neil's Garden + Duddingston</a></div><div class="nota">Jardim secreto à beira do lago (entrada pela Old Church Lane). Sheep Heid Inn, o pub mais antigo da Escócia, fica ao lado.</div></div></div>
 
         <p class="periodo">Início da tarde</p>
-        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq">Craigmillar Castle</div><div class="nota">Prisão de Jamie em Outlander, £8. FECHA 16:30. Ônibus (~14/30/33) + 10 min a pé.</div></div></div>
+        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq"><a href="https://maps.google.com/?q=Craigmillar+Castle" target="_blank" rel="noopener">Craigmillar Castle</a></div><div class="nota">Prisão de Jamie em Outlander, £8. FECHA 16:30. Ônibus (~14/30/33) + 10 min a pé.</div></div></div>
+        <div class="check pergunta"><div class="box">✓</div><div class="txt">Craigmillar: o que acha??</div></div>
 
         <p class="periodo">Fim da tarde</p>
-        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq">Tour Fantasma Subterrâneo 👻</div><div class="nota">Os vaults da South Bridge (€22,39), as "casas subterrâneas" da lista. Sai do lado do hostel.</div></div></div>
+        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq"><a href="https://www.booking.com/attractions/gb/prwhxfza2doj-the-underground-ghost-tour.en-gb.html?start_date=2026-09-26&amp;end_date=2026-09-26&amp;source=searchresults-product-card&amp;date=2026-09-26&amp;aid=2399994&amp;ufi=-2595386&amp;timeslot=ATS-PRwhXFZA2DOj-202609261745-nullnull&amp;ticket_type=OFOR8wdElfZr" target="_blank" rel="noopener">The Underground Ghost Tour 👻</a></div><div class="nota">Os vaults da South Bridge (€22,39), as "casas subterrâneas" da lista. Sai do lado do hostel? Não sei!</div></div></div>
+
+        <p class="custo">💰 Dia: ~£45 a 50 (Craigmillar £8 + ghost tour €22,39 + ônibus + comida)</p>
       </div>
     </div>
 
@@ -576,27 +639,26 @@ footer{
         <span class="seta">▾</span>
       </button>
       <div class="corpo">
-        <p class="intro">Último dia inteiro: café com vista, a rua que esquenta, vilarejo de conto de fadas e pôr do sol.</p>
-
         <p class="periodo">Início da manhã</p>
-        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq">Waterstones Princes Street</div><div class="nota">Café da manhã no topo com vista do castelo. Chegar cedo pela mesa da janela.</div></div></div>
+        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq"><a href="https://maps.google.com/?q=Waterstones+Princes+Street+Edinburgh" target="_blank" rel="noopener">Waterstones Princes Street</a></div><div class="nota">Café da manhã no topo com vista do castelo. Chegar cedo pela mesa da janela.</div></div></div>
 
         <p class="periodo">Meio-dia</p>
-        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq">The Mound, a rua que esquenta</div><div class="nota">Aquecimento elétrico sob o asfalto desde os anos 1950, pra derreter o gelo. Mistério da lista: resolvido ✅</div></div></div>
-        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq">Princes Street Gardens (= Nor Loch) + Scott Monument</div><div class="nota">O jardim É o antigo lago dos julgamentos de bruxas, drenado</div></div></div>
-        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq">Dean Bridge + Dean Village</div><div class="nota">Vilarejo de conto de fadas no Water of Leith. Fotão garantido.</div></div></div>
+        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq"><a href="https://maps.google.com/?q=Princes+Street+Gardens" target="_blank" rel="noopener">Princes Street Gardens (= Nor Loch) + Scott Monument</a></div><div class="nota">O jardim É o antigo lago dos julgamentos de bruxas, drenado</div></div></div>
+        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq"><a href="https://maps.google.com/?q=Dean+Village+Edinburgh" target="_blank" rel="noopener">Dean Bridge + Dean Village</a></div><div class="nota">Vilarejo de conto de fadas no Water of Leith para fotos</div></div></div>
 
         <p class="periodo">Início da tarde</p>
-        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq">South Queensferry <em>(se sobrar tempo)</em></div><div class="nota">Trem Haymarket → Dalmeny (~20 min, £5 a 7 ida/volta) + 15 min a pé. As 3 pontes do Forth + pint no Hawes Inn.</div></div></div>
+        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq"><a href="https://maps.google.com/?q=South+Queensferry" target="_blank" rel="noopener">South Queensferry</a> <em>(se sobrar tempo)</em></div><div class="nota">Trem Haymarket → Dalmeny (~20 min, £5 a 7 ida/volta) + 15 min a pé. As 3 pontes do Forth + pint no Hawes Inn.</div></div></div>
 
         <p class="periodo">Fim da tarde</p>
-        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq">Calton Hill</div><div class="nota">Pôr do sol 360° para fechar a viagem. Grátis.</div></div></div>
+        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq"><a href="https://maps.google.com/?q=Calton+Hill+Edinburgh" target="_blank" rel="noopener">Calton Hill</a></div><div class="nota">Pôr do sol.</div></div></div>
 
         <p class="periodo">Noite</p>
-        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq">Ghost Bus <em>(decidir lá)</em></div><div class="nota">£23 a 24, 75 min sentadas: comédia + terror. Sai do Lawnmarket. Depois: dormir cedo!</div></div></div>
+        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq"><a href="https://www.getyourguide.com/pt-br/iorque-l436/espetaculo-de-comedia-de-terror-york-excursao-mal-assombrada-de-onibus-t48586/?ranking_uuid=ad914fcd-11d5-4ab9-9202-829465d5ffae" target="_blank" rel="noopener">Ghost Bus</a> <em>(decidir lá)</em></div><div class="nota">£23 a 24, 75 min sentadas: comédia + terror. Sai do Lawnmarket. Depois: dormir cedo!</div></div></div>
 
         <p class="periodo">Madrugada</p>
-        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq">Airlink pro aeroporto ✈</div><div class="nota">Ônibus 24h saindo de Waverley Bridge. Voo 6h20.</div></div></div>
+        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq"><a href="https://maps.google.com/?q=Waverley+Bridge+Edinburgh" target="_blank" rel="noopener">Airlink pro aeroporto ✈</a></div><div class="nota">Ônibus 24h saindo de Waverley Bridge. Voo 6h20.</div></div></div>
+
+        <p class="custo">💰 Dia: ~£35 (café + trem + pint + comida) · extra: Ghost Bus £24 se rolar</p>
       </div>
     </div>
   </section>
@@ -666,7 +728,8 @@ function idDoItem(item){
 document.querySelectorAll('.stop, .check').forEach(item => {
   const id = idDoItem(item);
   if (salvos.includes(id)) item.classList.add('done');
-  item.addEventListener('click', () => {
+  item.addEventListener('click', (e) => {
+    if (e.target.closest('a') || e.target.closest('.opcao')) return;
     item.classList.toggle('done');
     if (item.classList.contains('done')) {
       if (!salvos.includes(id)) salvos.push(id);
@@ -674,6 +737,27 @@ document.querySelectorAll('.stop, .check').forEach(item => {
       salvos = salvos.filter(x => x !== id);
     }
     try { localStorage.setItem(KEY, JSON.stringify(salvos)); } catch(e) {}
+  });
+});
+
+// ---- escolha das opções no Resolver (pub crawl / tour noturno), com memória ----
+const OPKEY = 'roteiro-opcoes';
+let escolhas = {};
+try { escolhas = JSON.parse(localStorage.getItem(OPKEY) || '{}'); } catch(e) {}
+
+document.querySelectorAll('.opcoes').forEach(grupo => {
+  const g = grupo.dataset.group;
+  grupo.querySelectorAll('.opcao').forEach(op => {
+    if (escolhas[g] === op.dataset.op) op.classList.add('sel');
+    op.addEventListener('click', (e) => {
+      if (e.target.closest('a')) return; // a setinha ↗ só abre o link
+      e.stopPropagation();
+      const jaEstava = op.classList.contains('sel');
+      grupo.querySelectorAll('.opcao').forEach(o => o.classList.remove('sel'));
+      if (!jaEstava) { op.classList.add('sel'); escolhas[g] = op.dataset.op; }
+      else { delete escolhas[g]; }
+      try { localStorage.setItem(OPKEY, JSON.stringify(escolhas)); } catch(e) {}
+    });
   });
 });
 </script>
