@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Are you ready? · Edimburgo · Londres · Paris</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#da9a44;
+  --olive:#4a441f;
+  --brown:#936637;
+  --cream:#fdf6ea;
+  --display:'Syne', 'DM Sans', sans-serif;
+  --body:'DM Sans', sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--body);
+  background:var(--cream);
+  color:var(--olive);
+  font-size:15px;
+  line-height:1.55;
+}
+
+/* ---------- NAV ---------- */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:50;
+  background:var(--brown);
+  display:flex;justify-content:flex-end;gap:4px;
+  padding:10px 12px;
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+}
+body.on-home nav{display:none}
+nav button{
+  font-family:var(--body);
+  font-size:13px;font-weight:500;
+  color:var(--cream);
+  background:none;border:none;
+  padding:6px 12px;border-radius:99px;
+  cursor:pointer;white-space:nowrap;
+  opacity:.75;transition:.2s;
+}
+nav button.active{opacity:1;background:rgba(253,246,234,.16)}
+nav button:focus-visible{outline:2px solid var(--cream);outline-offset:2px}
+
+.page{display:none;padding-top:52px;min-height:100vh}
+.page.active{display:block}
+
+/* ---------- HOME ---------- */
+#home{
+  padding-top:0;
+  min-height:100vh;
+  background:url('https://img.wattpad.com/8202f0dcc2517404939c97532f73d1e517a7b75d/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f776174747061642d6d656469612d736572766963652f53746f7279496d6167652f78683777674544344852623247773d3d2d3732373831353736342e31366363616532623835346461316161363434393136323134372e676966') center/cover no-repeat;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;position:relative;gap:34px;padding:24px;
+}
+#home::after{content:'';position:absolute;inset:0;background:rgba(74,68,31,.14)}
+#home h1{
+  font-family:var(--display);
+  font-weight:700;
+  color:var(--cream);
+  font-size:clamp(2.6rem,11vw,5.5rem);
+  letter-spacing:.06em;
+  position:relative;z-index:1;
+  text-shadow:0 2px 24px rgba(74,68,31,.4);
+}
+.city-links{
+  position:relative;z-index:1;
+  display:flex;flex-direction:column;gap:12px;width:100%;max-width:320px;
+}
+.city-links button{
+  font-family:var(--display);font-weight:700;
+  font-size:1.15rem;letter-spacing:.08em;
+  background:rgba(253,246,234,.92);color:var(--olive);
+  border:none;border-radius:99px;
+  padding:14px 24px;cursor:pointer;
+  transition:transform .15s, background .15s;
+}
+.city-links button:hover{transform:scale(1.04);background:var(--gold)}
+.city-links button:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.city-links button small{
+  display:block;font-family:var(--body);font-weight:400;
+  font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--brown);
+}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .city-links button:hover{transform:none}
+}
+
+/* ---------- ESTRUTURA ---------- */
+.wrap{max-width:680px;margin:0 auto;padding:0 18px}
+section{padding:44px 0}
+
+.city-hero{
+  position:relative;overflow:hidden;
+  background:var(--olive);
+  color:var(--cream);text-align:center;
+  min-height:100vh;min-height:100svh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:72px 18px 56px;
+}
+.hero-video{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;z-index:0;
+}
+.city-hero::after{
+  content:'';position:absolute;inset:0;z-index:1;
+  background:rgba(74,68,31,.55);
+}
+.hero-conteudo{position:relative;z-index:2}
+.desce{
+  position:absolute;bottom:26px;left:0;right:0;z-index:2;
+  font-size:26px;color:var(--cream);text-align:center;
+  animation:desce 2.2s ease-in-out infinite;
+}
+@keyframes desce{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+@media (prefers-reduced-motion:reduce){.desce{animation:none}}
+.video-hint{
+  display:inline-block;margin-top:22px;
+  border:2px dashed rgba(253,246,234,.55);border-radius:99px;
+  padding:6px 18px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  color:rgba(253,246,234,.75);
+}
+.city-hero h2{
+  font-family:var(--display);font-weight:700;
+  color:var(--gold);
+  font-size:clamp(2.4rem,10vw,4rem);
+  letter-spacing:.08em;
+}
+.city-hero p{margin-top:10px;font-size:14px;letter-spacing:.14em;text-transform:uppercase}
+
+/* scallop, o babadinho do PDF */
+.scallop{
+  height:22px;
+  background:radial-gradient(circle at 11px -4px, var(--olive) 13px, transparent 14px);
+  background-size:22px 22px;
+  background-repeat:repeat-x;
+}
+.scallop.gold{background:radial-gradient(circle at 11px -4px, var(--gold) 13px, transparent 14px);background-size:22px 22px;background-repeat:repeat-x}
+
+h3.titulo{
+  font-family:var(--display);font-weight:700;
+  font-size:1.7rem;letter-spacing:.06em;
+  text-align:center;margin-bottom:26px;
+  color:var(--olive);
+}
+.dark h3.titulo{color:var(--gold)}
+
+/* ---------- CARDS ---------- */
+.card{
+  background:var(--olive);color:var(--cream);
+  border-radius:20px;padding:22px 20px;
+  margin-bottom:18px;
+}
+.card h4{
+  font-family:var(--display);font-weight:700;
+  color:var(--gold);font-size:1.15rem;letter-spacing:.05em;
+  margin-bottom:12px;
+}
+.card p{margin-bottom:8px;font-size:14px;font-weight:300}
+.card p strong{font-weight:600;color:var(--gold)}
+
+/* cards amarelos (comidas, transporte, resolver) */
+.card.amarelo{background:var(--gold);color:var(--cream)}
+.card.amarelo h4{color:var(--cream)}
+.card.amarelo p{font-weight:400}
+.card.amarelo p strong{color:var(--cream);font-weight:700}
+.card.amarelo a{color:var(--cream);font-weight:600}
+
+.tag{
+  display:inline-block;background:var(--gold);color:var(--olive);
+  font-size:12px;font-weight:600;padding:4px 14px;border-radius:99px;
+  margin:2px 4px 2px 0;text-decoration:none;
+  transition:transform .15s;
+}
+a.tag:hover{transform:scale(1.06)}
+a.tag:focus-visible{outline:2px solid var(--cream);outline-offset:2px}
+
+/* ---------- COMIDAS: acordeão ---------- */
+.food{margin-bottom:10px}
+.food > button{
+  width:100%;
+  font-family:var(--body);font-size:14px;font-weight:500;
+  background:var(--cream);color:var(--olive);
+  border:none;border-radius:18px;
+  padding:12px 20px;cursor:pointer;
+  display:flex;justify-content:space-between;align-items:center;
+  transition:border-radius .2s;
+}
+.food.open > button{border-radius:18px 18px 0 0}
+.food > button:focus-visible{outline:2px solid var(--olive);outline-offset:2px}
+.food > button .seta{color:var(--brown);font-weight:600;transition:transform .25s}
+.food.open > button .seta{transform:rotate(90deg)}
+.food .desc{
+  display:none;
+  background:var(--olive);color:var(--cream);
+  border-radius:0 0 18px 18px;
+  padding:14px 20px;font-size:13px;font-weight:300;
+}
+.food.open .desc{display:block}
+
+/* ---------- RESOLVER checklist ---------- */
+.check{
+  display:flex;gap:12px;align-items:flex-start;
+  background:rgba(74,68,31,.14);
+  border-radius:14px;padding:12px 14px;margin-bottom:10px;
+  cursor:pointer;color:var(--cream);
+}
+.check .box{
+  flex:none;width:20px;height:20px;margin-top:2px;
+  border:2px solid var(--cream);border-radius:6px;
+  display:grid;place-items:center;
+  color:var(--gold);font-size:13px;font-weight:700;
+  transition:.2s;
+}
+.check.done .box{background:var(--cream)}
+.check.done .txt{opacity:.55;text-decoration:line-through}
+.check .txt{font-size:14px}
+
+/* ---------- ITINERÁRIO ---------- */
+.day{
+  border:2px solid var(--olive);border-radius:20px;
+  margin-bottom:16px;overflow:hidden;
+  background:#fff9ef;
+}
+.day > button{
+  width:100%;border:none;cursor:pointer;
+  background:var(--olive);color:var(--cream);
+  display:flex;align-items:center;gap:12px;
+  padding:16px 18px;text-align:left;
+  font-family:var(--body);
+}
+.day > button:focus-visible{outline:2px solid var(--gold);outline-offset:-4px}
+.day .data{
+  font-family:var(--display);color:var(--olive);
+  background:var(--gold);border-radius:12px;
+  padding:6px 10px;font-size:.95rem;letter-spacing:.04em;flex:none;
+}
+.day .nome{font-weight:600;font-size:15px}
+.day .sub{font-size:12px;font-weight:300;opacity:.85}
+.day .seta{margin-left:auto;color:var(--gold);transition:transform .25s;flex:none}
+.day.open .seta{transform:rotate(180deg)}
+.day .corpo{display:none;padding:8px 18px 18px}
+.day.open .corpo{display:block}
+.day .intro{
+  font-size:13px;font-weight:300;font-style:italic;
+  color:var(--brown);padding:12px 2px;border-bottom:1px dashed var(--gold);
+  margin-bottom:4px;
+}
+.periodo{
+  font-family:var(--display);font-weight:700;
+  font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--brown);
+  display:flex;align-items:center;gap:10px;
+  margin:16px 0 4px;
+}
+.periodo::after{content:'';flex:1;height:1px;background:var(--gold);opacity:.5}
+.stop{
+  display:flex;gap:12px;align-items:flex-start;
+  padding:10px 4px;
+  border-bottom:1px dashed rgba(147,102,55,.25);
+  cursor:pointer;
+}
+.stop:last-child{border-bottom:none}
+.stop .box{
+  flex:none;width:22px;height:22px;margin-top:2px;
+  border:2px solid var(--brown);border-radius:7px;
+  display:grid;place-items:center;
+  color:var(--cream);font-size:13px;font-weight:700;
+  transition:.2s;background:transparent;
+}
+.stop.done .box{background:var(--brown)}
+.stop.done .info{opacity:.5}
+.stop.done .oq{text-decoration:line-through}
+.stop .oq{font-weight:600;font-size:14px}
+.stop .nota{font-size:13px;font-weight:300;color:var(--brown)}
+
+/* ---------- PLACEHOLDER ---------- */
+.placeholder{
+  min-height:calc(100vh - 52px);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;gap:14px;padding:24px;
+}
+.placeholder h2{
+  font-family:var(--display);font-weight:700;
+  color:var(--gold);font-size:clamp(2rem,9vw,3.4rem);letter-spacing:.08em;
+}
+.placeholder p{color:var(--brown);font-size:14px}
+.placeholder .em-breve{
+  border:2px dashed var(--gold);border-radius:99px;
+  padding:8px 22px;font-size:13px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--brown);
+}
+
+footer{
+  background:var(--brown);color:var(--cream);
+  text-align:center;padding:26px 18px;font-size:12px;font-weight:300;
+  letter-spacing:.08em;
+}
+
+@media (min-width:640px){
+  nav{padding:12px 32px;gap:10px}
+  nav button{font-size:14px}
+  .city-links{flex-direction:row;max-width:640px;justify-content:center}
+  .city-links button{flex:1}
+}
+</style>
+</head>
+<body class="on-home">
+
+<nav>
+  <button data-page="home">Home</button>
+  <button data-page="edimburgo">Edimburgo</button>
+  <button data-page="londres">Londres</button>
+  <button data-page="paris">Paris</button>
+</nav>
+
+<!-- ============ HOME ============ -->
+<div class="page active" id="home">
+  <h1>Are you ready?</h1>
+  <div class="city-links">
+    <button data-page="edimburgo">Edimburgo <small>25 a 28 set</small></button>
+    <button data-page="londres">Londres <small>em breve</small></button>
+    <button data-page="paris">Paris <small>em breve</small></button>
+  </div>
+</div>
+
+<!-- ============ EDIMBURGO ============ -->
+<div class="page" id="edimburgo">
+
+  <div class="city-hero">
+    <!-- VÍDEO DE FUNDO: quando tiver o vídeo, descomente a linha do <source>
+         e troque "SEU-VIDEO.mp4" pelo caminho do arquivo (ex: videos/scotland.mp4) -->
+    <video class="hero-video" autoplay muted loop playsinline poster="">
+      <!-- <source src="SEU-VIDEO.mp4" type="video/mp4"> -->
+    </video>
+    <div class="hero-conteudo">
+      <h2>Scotland</h2>
+      <p>25 a 28 de setembro de 2026</p>
+      <div class="video-hint">🎬 vídeo aqui em breve</div>
+    </div>
+    <div class="desce">↓</div>
+  </div>
+  <div class="scallop"></div>
+
+  <!-- HOSTEL -->
+  <section class="wrap">
+    <h3 class="titulo">Safestay Cowgate</h3>
+    <div class="card">
+      <p><strong>📍 116 Cowgate, Edinburgh EH1 1JN, UK</strong></p>
+      <p><strong>Check-in 15h | Check-out 11h</strong> · Recepção 24h/7</p>
+      <p>🍴 Não tem cozinha compartilhada. Levar talheres!</p>
+      <p>💨 Tem secador de cabelo na recepção.</p>
+      <p>🌧️ Escócia pode chover a qualquer momento. Capa de chuva?</p>
+      <p style="margin-top:12px"><strong>Mercados próximos:</strong></p>
+      <div>
+        <a class="tag" href="https://maps.google.com/?q=Lidl+near+116+Cowgate+Edinburgh" target="_blank" rel="noopener">Lidl</a><a class="tag" href="https://maps.google.com/?q=Sainsburys+near+116+Cowgate+Edinburgh" target="_blank" rel="noopener">Sainsbury's</a><a class="tag" href="https://maps.google.com/?q=M%26S+Food+near+116+Cowgate+Edinburgh" target="_blank" rel="noopener">M&amp;S Food</a><a class="tag" href="https://maps.google.com/?q=Tesco+near+116+Cowgate+Edinburgh" target="_blank" rel="noopener">Tesco</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- MUST KNOW -->
+  <div class="scallop gold" style="transform:scaleY(-1)"></div>
+  <section class="dark" style="background:var(--olive)">
+    <div class="wrap">
+      <h3 class="titulo">Must know</h3>
+
+      <!-- comidas: acordeão -->
+      <div class="card amarelo">
+        <h4>Comidas típicas</h4>
+        <div class="food">
+          <button>Vegan Haggis <span class="seta">›</span></button>
+          <div class="desc">O prato mais famoso! A versão vegan é feita com ervilhas. O original é ovelha com aveia. Acompanha "Neeps and tatties", que é purê de rutabaga (nabo) e purê de batatas.</div>
+        </div>
+        <div class="food">
+          <button>Porridge <span class="seta">›</span></button>
+          <div class="desc">Isso é mingau, mas é bem famoso lá. Será que é diferente? kk</div>
+        </div>
+        <div class="food">
+          <button>Shortbread <span class="seta">›</span></button>
+          <div class="desc">Restos de massa de pão adoçados. Manteiga e açúcar, é bem natalino e doce de casamento.</div>
+        </div>
+        <div class="food">
+          <button>Cranachan <span class="seta">›</span></button>
+          <div class="desc">Framboesas com crowdie (um queijo fresco escocês), aveia, mel e whisky.</div>
+        </div>
+        <div class="food">
+          <button>Scotch Pie <span class="seta">›</span></button>
+          <div class="desc">A verdadeira é com carne, mas tem versões vegan com soja.</div>
+        </div>
+        <div class="food">
+          <button>Stovies <span class="seta">›</span></button>
+          <div class="desc">Batata, cebola e, em vez de restos de carne assada, cogumelos, salsichas vegetais ou lentilhas. É comida de tacho, aceita tudo.</div>
+        </div>
+      </div>
+
+      <!-- transporte -->
+      <div class="card amarelo">
+        <h4>Transporte</h4>
+        <p><strong>Ônibus urbano (Lothian):</strong> £2,20 por viagem no cartão por aproximação. Usando o mesmo cartão o dia todo, o teto diário é ~£5 automático. Não precisa comprar bilhete.</p>
+        <p><strong>Aeroporto ↔ centro:</strong> Airlink 100, roda 24h, ~30 min até Waverley Bridge // é a última parada (7 min a pé do hostel).</p>
+        <p><strong>Volta (29/09, 4h da manhã):</strong> Airlink 24h.</p>
+        <p><strong>Queensferry:</strong> trem Haymarket → Dalmeny, ~20 min, ~£5 a 7 ida e volta, + 15 min a pé ladeira abaixo.</p>
+        <p><strong>Craigmillar:</strong> ônibus ~20 a 25 min da região da North Bridge + 10 min a pé.</p>
+        <p><strong>O resto:</strong> 45 km a pé =D</p>
+        <p style="text-align:center;margin-top:14px;font-weight:600">🥨 +/- £20</p>
+      </div>
+
+      <!-- resolver -->
+      <div class="card amarelo">
+        <h4>🧙 Resolver</h4>
+        <div class="check"><div class="box">✓</div><div class="txt"><strong>31/07:</strong> sai a programação do Doors Open Days. Conferir se o Carlowrie Castle (ou outros lugares fechados e pagos) abre no fim de semana 26 e 27.</div></div>
+        <div class="check"><div class="box">✓</div><div class="txt">Escolher qual dos dois pub crawls e decidir a noite lá: sexta ou sábado.</div></div>
+        <div class="check"><div class="box">✓</div><div class="txt">Vamos em algum tour noturno ou no bus? Escolher entre um ou outro.</div></div>
+        <div class="check"><div class="box">✓</div><div class="txt">Conferir se deixar as malas no hostel antes do check-in é pago.</div></div>
+      </div>
+    </div>
+  </section>
+  <div class="scallop"></div>
+
+  <!-- ITINERÁRIO -->
+  <section class="wrap">
+    <h3 class="titulo">Roteiro dia a dia</h3>
+
+    <!-- SEX 25 -->
+    <div class="day open">
+      <button>
+        <span class="data">25/09</span>
+        <span><span class="nome">Sex · Dia de Old Town!</span><br><span class="sub">Cidade velha inteira a pé</span></span>
+        <span class="seta">▾</span>
+      </button>
+      <div class="corpo">
+        <p class="intro">Chegada de madrugada no aeroporto → Airlink até o centro → malas no hostel → cidade velha inteira a pé.</p>
+
+        <p class="periodo">Início da manhã</p>
+        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq">Safestay Cowgate</div><div class="nota">Deixar as malas (check-in 15h) // vou conferir se é pago</div></div></div>
+        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq">Royal Mile + St Giles' Cathedral</div><div class="nota">A catedral é grátis (doação) // vitrais e teto azul</div></div></div>
+        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq">Edinburgh Castle</div><div class="nota">Ver por fora; se for entrar, £27</div></div></div>
+
+        <p class="periodo">Meio-dia</p>
+        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq">Vennel Viewpoint + almoço no Grassmarket</div><div class="nota">A escadinha com A foto do castelo</div></div></div>
+        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq">Victoria Street + Jogo HP ⚡</div><div class="nota">O Beco Diagonal: começar o jogo de exploração por aqui</div></div></div>
+
+        <p class="periodo">Fim da tarde</p>
+        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq">The Elephant House</div><div class="nota">Butterbeer + shortbread. Fecha 18h.</div></div></div>
+        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq">Greyfriars Kirkyard <em>(plano B: Museu Nacional)</em></div><div class="nota">Túmulo de Tom Riddell + mausoléu do Bloody Mackenzie. Se chover: Museu Nacional ao lado, grátis, com terraço.</div></div></div>
+
+        <p class="periodo">Noite</p>
+        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq">The Three Sisters</div><div class="nota">Jantar (pizza £7,50) em frente ao hostel, e já é bar</div></div></div>
+        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq">Cabaret Voltaire ou pub crawl</div><div class="nota">Balada subterrânea a 2 min. Só abre sex e sáb, e hoje é dia!</div></div></div>
+      </div>
+    </div>
+
+    <!-- SAB 26 -->
+    <div class="day">
+      <button>
+        <span class="data">26/09</span>
+        <span><span class="nome">Sáb · Highlands: Glenfinnan &amp; Glencoe ⚡</span><br><span class="sub">Dia inteiro de tour (~7h às 19h)</span></span>
+        <span class="seta">▾</span>
+      </button>
+      <div class="corpo">
+        <p class="intro">Viaduto do Expresso de Hogwarts, Glencoe, Rannoch Moor. Levar lanche e casaco!</p>
+
+        <p class="periodo">Início da manhã</p>
+        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq">Saída do tour</div><div class="nota">Ponto de encontro vem na confirmação da reserva</div></div></div>
+
+        <p class="periodo">Meio-dia</p>
+        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq">Glenfinnan Viaduct</div><div class="nota">Se os horários baterem, o trem a vapor cruza o viaduto. Dedos cruzados 🤞</div></div></div>
+
+        <p class="periodo">Noite</p>
+        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq">Volta a Edimburgo</div><div class="nota">Jantar tranquilo perto do hostel</div></div></div>
+        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq">Whistlebinkies ou pub crawl / Cabaret</div><div class="nota">Rockzinho ao vivo a 3 min do hostel: energia baixa, cerveja e música</div></div></div>
+      </div>
+    </div>
+
+    <!-- DOM 27 -->
+    <div class="day">
+      <button>
+        <span class="data">27/09</span>
+        <span><span class="nome">Dom · Zen no leste + fantasmas</span><br><span class="sub">Lago, ruínas, castelo e subsolo</span></span>
+        <span class="seta">▾</span>
+      </button>
+      <div class="corpo">
+        <p class="intro">Manhã de lago, ruínas e jardim secreto; tarde de castelo medieval; noite embaixo da terra.</p>
+
+        <p class="periodo">Início da manhã</p>
+        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq">St Margaret's Loch + ruínas da St Anthony's Chapel</div><div class="nota">Lago com cisnes + subidinha leve. A vibe do vulcão sem a trilha inteira, mas o cume do Arthur's Seat sai daqui, se bater disposição.</div></div></div>
+        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq">Dr Neil's Garden + Duddingston</div><div class="nota">Jardim secreto à beira do lago (entrada pela Old Church Lane). Sheep Heid Inn, o pub mais antigo da Escócia, fica ao lado.</div></div></div>
+
+        <p class="periodo">Início da tarde</p>
+        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq">Craigmillar Castle</div><div class="nota">Prisão de Jamie em Outlander, £8. FECHA 16:30. Ônibus (~14/30/33) + 10 min a pé.</div></div></div>
+
+        <p class="periodo">Fim da tarde</p>
+        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq">Tour Fantasma Subterrâneo 👻</div><div class="nota">Os vaults da South Bridge (€22,39), as "casas subterrâneas" da lista. Sai do lado do hostel.</div></div></div>
+      </div>
+    </div>
+
+    <!-- SEG 28 -->
+    <div class="day">
+      <button>
+        <span class="data">28/09</span>
+        <span><span class="nome">Seg · New Town, segredos &amp; despedida</span><br><span class="sub">Voo às 6h20 do dia 29!</span></span>
+        <span class="seta">▾</span>
+      </button>
+      <div class="corpo">
+        <p class="intro">Último dia inteiro: café com vista, a rua que esquenta, vilarejo de conto de fadas e pôr do sol.</p>
+
+        <p class="periodo">Início da manhã</p>
+        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq">Waterstones Princes Street</div><div class="nota">Café da manhã no topo com vista do castelo. Chegar cedo pela mesa da janela.</div></div></div>
+
+        <p class="periodo">Meio-dia</p>
+        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq">The Mound, a rua que esquenta</div><div class="nota">Aquecimento elétrico sob o asfalto desde os anos 1950, pra derreter o gelo. Mistério da lista: resolvido ✅</div></div></div>
+        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq">Princes Street Gardens (= Nor Loch) + Scott Monument</div><div class="nota">O jardim É o antigo lago dos julgamentos de bruxas, drenado</div></div></div>
+        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq">Dean Bridge + Dean Village</div><div class="nota">Vilarejo de conto de fadas no Water of Leith. Fotão garantido.</div></div></div>
+
+        <p class="periodo">Início da tarde</p>
+        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq">South Queensferry <em>(se sobrar tempo)</em></div><div class="nota">Trem Haymarket → Dalmeny (~20 min, £5 a 7 ida/volta) + 15 min a pé. As 3 pontes do Forth + pint no Hawes Inn.</div></div></div>
+
+        <p class="periodo">Fim da tarde</p>
+        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq">Calton Hill</div><div class="nota">Pôr do sol 360° para fechar a viagem. Grátis.</div></div></div>
+
+        <p class="periodo">Noite</p>
+        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq">Ghost Bus <em>(decidir lá)</em></div><div class="nota">£23 a 24, 75 min sentadas: comédia + terror. Sai do Lawnmarket. Depois: dormir cedo!</div></div></div>
+
+        <p class="periodo">Madrugada</p>
+        <div class="stop"><div class="box">✓</div><div class="info"><div class="oq">Airlink pro aeroporto ✈</div><div class="nota">Ônibus 24h saindo de Waverley Bridge. Voo 6h20.</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>25 a 28 set 2026 · Edimburgo 🏴󠁧󠁢󠁳󠁣󠁴󠁿</footer>
+</div>
+
+<!-- ============ LONDRES ============ -->
+<div class="page" id="londres">
+  <div class="placeholder">
+    <h2>London</h2>
+    <p>O roteiro de Londres ainda está no caldeirão…</p>
+    <div class="em-breve">Em breve</div>
+  </div>
+</div>
+
+<!-- ============ PARIS ============ -->
+<div class="page" id="paris">
+  <div class="placeholder">
+    <h2>Paris</h2>
+    <p>O roteiro de Paris ainda está no caldeirão…</p>
+    <div class="em-breve">Em breve</div>
+  </div>
+</div>
+
+<script>
+// ---- navegação entre "páginas" ----
+const navBtns = document.querySelectorAll('nav button');
+const pages = document.querySelectorAll('.page');
+function goTo(id){
+  pages.forEach(p => {
+    const ativa = p.id === id;
+    p.classList.toggle('active', ativa);
+    p.style.display = ativa ? 'block' : 'none';
+  });
+  navBtns.forEach(b => b.classList.toggle('active', b.dataset.page === id));
+  document.body.classList.toggle('on-home', id === 'home');
+  window.scrollTo({top:0, behavior:'auto'});
+}
+navBtns.forEach(b => b.addEventListener('click', () => goTo(b.dataset.page)));
+document.querySelectorAll('.city-links button').forEach(b => {
+  b.addEventListener('click', () => goTo(b.dataset.page));
+});
+
+// ---- accordion dos dias ----
+document.querySelectorAll('.day > button').forEach(btn => {
+  btn.addEventListener('click', () => btn.parentElement.classList.toggle('open'));
+});
+
+// ---- comidas típicas: abrir/fechar descrição ----
+document.querySelectorAll('.food > button').forEach(btn => {
+  btn.addEventListener('click', () => btn.parentElement.classList.toggle('open'));
+});
+
+// ---- checkboxes: paradas do roteiro + lista Resolver, com memória ----
+// (localStorage funciona quando a página estiver hospedada, ex. GitHub Pages;
+//  na pré-visualização do Claude ele é bloqueado, então usamos try/catch)
+const KEY = 'roteiro-checks';
+let salvos = [];
+try { salvos = JSON.parse(localStorage.getItem(KEY) || '[]'); } catch(e) {}
+
+function idDoItem(item){
+  const alvo = item.querySelector('.oq, .txt');
+  return (alvo ? alvo.textContent : '').trim().slice(0, 60);
+}
+
+document.querySelectorAll('.stop, .check').forEach(item => {
+  const id = idDoItem(item);
+  if (salvos.includes(id)) item.classList.add('done');
+  item.addEventListener('click', () => {
+    item.classList.toggle('done');
+    if (item.classList.contains('done')) {
+      if (!salvos.includes(id)) salvos.push(id);
+    } else {
+      salvos = salvos.filter(x => x !== id);
+    }
+    try { localStorage.setItem(KEY, JSON.stringify(salvos)); } catch(e) {}
+  });
+});
+</script>
+</body>
+</html>
