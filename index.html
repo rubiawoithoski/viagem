@@ -188,8 +188,8 @@ h3.titulo{
 }
 .card p{margin-bottom:8px;font-size:14px;font-weight:300}
 .card p strong{font-weight:600;color:var(--gold)}
-.card p a{color:var(--gold);text-underline-offset:3px}
-.card p a.btn-total{color:var(--olive)}
+.card p a{color:var(--cream);text-decoration:underline;text-underline-offset:3px}
+.card p a.btn-total{color:var(--olive);text-decoration:none}
 
 /* botão do total da viagem */
 .btn-total{
@@ -273,7 +273,7 @@ a.tag:focus-visible{outline:2px solid var(--cream);outline-offset:2px}
 .check.done .txt{opacity:.55;text-decoration:line-through}
 .check .txt{font-size:14px;font-weight:300}
 .check .txt strong{color:var(--gold);font-weight:600}
-.check .txt a{color:var(--gold);text-underline-offset:3px}
+.check .txt a{color:var(--cream);text-decoration:underline;text-underline-offset:3px}
 
 /* pílulas de escolha dentro do Resolver */
 .opcoes{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
@@ -370,15 +370,18 @@ a.tag:focus-visible{outline:2px solid var(--cream);outline-offset:2px}
 .stop.done .box{background:var(--brown)}
 .stop.done .info{opacity:.5}
 .stop.done .oq{text-decoration:line-through}
-.stop .oq{font-weight:600;font-size:14px}
+.stop .oq{font-weight:600;font-size:14px;color:var(--olive)}
 .stop .oq a{
-  color:inherit;
+  color:var(--olive);
   text-decoration:underline;
-  text-decoration-style:dotted;
-  text-decoration-color:var(--gold);
   text-underline-offset:3px;
 }
 .stop .nota{font-size:13px;font-weight:300;color:var(--brown)}
+.stop .nota a{
+  color:var(--brown);
+  text-decoration:underline;
+  text-underline-offset:3px;
+}
 
 /* pergunta no meio do roteiro */
 .check.pergunta{
