@@ -136,6 +136,16 @@ section{padding:44px 0}
   background:linear-gradient(160deg, #5a5330 0%, var(--olive) 55%, #35310f 100%);
 }
 .city-hero-lisboa::before, .city-hero-porto::before{display:none}
+.hero-gif{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;z-index:0;
+}
+.city-hero-lisboa::after, .city-hero-porto::after{
+  content:'';position:absolute;inset:0;z-index:1;
+  background:rgba(74,68,31,.35);
+}
+.city-hero-lisboa .hero-conteudo, .city-hero-lisboa .desce,
+.city-hero-porto .hero-conteudo, .city-hero-porto .desce{position:relative;z-index:2}
 
 /* scallop, o babadinho do PDF */
 .scallop{
@@ -486,6 +496,7 @@ footer{
 <!-- ============ LISBOA ============ -->
 <div class="page" id="lisboa">
   <div class="city-hero city-hero-lisboa">
+    <img class="hero-gif" src="lisboa.gif" alt="Lisboa" onerror="this.style.display='none'">
     <div class="hero-conteudo">
       <h2>Lisboa</h2>
       <p>22 (noite) a 24 de setembro</p>
