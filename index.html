@@ -132,6 +132,11 @@ section{padding:44px 0}
 }
 .city-hero p{margin-top:10px;font-size:14px;letter-spacing:.14em;text-transform:uppercase}
 
+.city-hero-lisboa, .city-hero-porto{
+  background:linear-gradient(160deg, #5a5330 0%, var(--olive) 55%, #35310f 100%);
+}
+.city-hero-lisboa::before, .city-hero-porto::before{display:none}
+
 /* scallop, o babadinho do PDF */
 .scallop{
   height:22px;
@@ -480,24 +485,101 @@ footer{
 
 <!-- ============ LISBOA ============ -->
 <div class="page" id="lisboa">
-  <div class="placeholder">
-    <h2>Lisboa</h2>
-    <p style="font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--brown)">22 (noite) a 24 de setembro</p>
-    <p class="loading-dots">Carregando o roteiro de Lisboa</p>
-    <div class="loading-bar"></div>
-    <p style="margin-top:22px;font-size:13px;color:var(--brown);max-width:320px">Bus pro Porto dia 24 às 07h ✈️</p>
+  <div class="city-hero city-hero-lisboa">
+    <div class="hero-conteudo">
+      <h2>Lisboa</h2>
+      <p>22 (noite) a 24 de setembro</p>
+    </div>
+    <div class="desce">↓</div>
   </div>
+
+  <div class="scallop gold" style="transform:scaleY(-1);background-color:var(--olive)"></div>
+  <section class="gold-bg" style="background:var(--gold)">
+    <div class="wrap">
+      <h3 class="titulo">Must know</h3>
+      <div class="card">
+        <h4>🚌 Transporte</h4>
+        <div id="transporte-lisboa"><p class="loading-dots" style="color:var(--cream)">Carregando</p></div>
+      </div>
+      <div class="card">
+        <h4>🧙 Resolver</h4>
+        <div id="resolver-lisboa"><div class="check-loading">Carregando lista…</div></div>
+      </div>
+    </div>
+  </section>
+  <div class="scallop" style="background-color:var(--gold)"></div>
+
+  <section class="wrap">
+    <h3 class="titulo">Roteiro dia a dia</h3>
+    <div id="dias-lisboa"><p style="text-align:center;color:var(--brown);font-style:italic">Carregando o roteiro…</p></div>
+  </section>
+
+  <div class="scallop gold" style="transform:scaleY(-1);background-color:var(--cream)"></div>
+  <section class="gold-bg" style="background:var(--gold)">
+    <div class="wrap">
+      <h3 class="titulo">Salvos</h3>
+      <div class="card"><h4>🍺 Bares e pubs</h4><div id="lisboa-bares"><p style="opacity:.6">Carregando…</p></div></div>
+      <div class="card"><h4>🍕 Comida</h4><div id="lisboa-comida"><p style="opacity:.6">Carregando…</p></div></div>
+      <div class="card"><h4>☕ Cafés</h4><div id="lisboa-cafes"><p style="opacity:.6">Carregando…</p></div></div>
+      <div class="card"><h4>🏰 Lugares</h4><div id="lisboa-lugares"><p style="opacity:.6">Carregando…</p></div></div>
+      <div class="card"><h4>📚 Lojas/livrarias</h4><div id="lisboa-lojas"><p style="opacity:.6">Carregando…</p></div></div>
+    </div>
+  </section>
+
+  <footer>22 a 24 set 2026 · Lisboa 🇵🇹 · Bus pro Porto dia 24 às 07h</footer>
 </div>
 
 <!-- ============ PORTO ============ -->
 <div class="page" id="porto">
-  <div class="placeholder">
-    <h2>Porto</h2>
-    <p style="font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--brown)">24 de setembro</p>
-    <p class="loading-dots">Carregando o roteiro do Porto</p>
-    <div class="loading-bar"></div>
-    <p style="margin-top:22px;font-size:13px;color:var(--brown);max-width:320px">Dia inteiro no Porto. Voo pra Edimburgo às 21h45 ✈️</p>
+  <div class="city-hero city-hero-porto">
+    <div class="hero-conteudo">
+      <h2>Porto</h2>
+      <p>24 de setembro</p>
+    </div>
+    <div class="desce">↓</div>
   </div>
+
+  <section class="wrap">
+    <h3 class="titulo">Bagagem &amp; base</h3>
+    <div class="card" id="hostel-porto">
+      <p class="loading-dots" style="color:var(--cream)">Carregando</p>
+    </div>
+  </section>
+
+  <div class="scallop gold" style="transform:scaleY(-1);background-color:var(--cream)"></div>
+  <section class="gold-bg" style="background:var(--gold)">
+    <div class="wrap">
+      <h3 class="titulo">Must know</h3>
+      <div class="card">
+        <h4>🚌 Transporte</h4>
+        <div id="transporte-porto"><p class="loading-dots" style="color:var(--cream)">Carregando</p></div>
+      </div>
+      <div class="card">
+        <h4>🧙 Resolver</h4>
+        <div id="resolver-porto"><div class="check-loading">Carregando lista…</div></div>
+      </div>
+    </div>
+  </section>
+  <div class="scallop" style="background-color:var(--gold)"></div>
+
+  <section class="wrap">
+    <h3 class="titulo">Roteiro do dia</h3>
+    <div id="dias-porto"><p style="text-align:center;color:var(--brown);font-style:italic">Carregando o roteiro…</p></div>
+  </section>
+
+  <div class="scallop gold" style="transform:scaleY(-1);background-color:var(--cream)"></div>
+  <section class="gold-bg" style="background:var(--gold)">
+    <div class="wrap">
+      <h3 class="titulo">Salvos</h3>
+      <div class="card"><h4>🍺 Bares e pubs</h4><div id="porto-bares"><p style="opacity:.6">Carregando…</p></div></div>
+      <div class="card"><h4>🍕 Comida</h4><div id="porto-comida"><p style="opacity:.6">Carregando…</p></div></div>
+      <div class="card"><h4>☕ Cafés</h4><div id="porto-cafes"><p style="opacity:.6">Carregando…</p></div></div>
+      <div class="card"><h4>🏰 Lugares</h4><div id="porto-lugares"><p style="opacity:.6">Carregando…</p></div></div>
+      <div class="card"><h4>📚 Lojas/livrarias</h4><div id="porto-lojas"><p style="opacity:.6">Carregando…</p></div></div>
+    </div>
+  </section>
+
+  <footer>24 set 2026 · Porto 🇵🇹 · Voo pra Edimburgo às 21h45</footer>
 </div>
 
 <!-- ============ EDIMBURGO ============ -->
@@ -797,56 +879,23 @@ footer{
 
 <script>
 // ==================================================================
-// SHEETS: cole aqui a URL do CSV publicado da sua planilha
-// (Arquivo → Compartilhar → Publicar na web → Documento inteiro / CSV)
-// Se ficar vazio, usa a lista de fallback abaixo.
+// SHEETS: cada cidade tem sua própria aba (ou várias) na planilha.
+// Cole aqui as URLs de CSV publicadas de cada aba. Para cada aba nova:
+// Sheets → Arquivo → Compartilhar → Publicar na web → escolher a aba
+// e "Valores separados por vírgula" → copiar o link → colar aqui.
 // ==================================================================
-const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQeR8SyKPjwgtfgmu1djrhu6JLLryiv7Ng5izrKu1Xu2GuTxkmD2g9ZEudNSn4TDH1jSeE9hANgkDX8/pub?gid=2092317482&single=true&output=csv';
+const SHEETS = {
+  edimburgo: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQeR8SyKPjwgtfgmu1djrhu6JLLryiv7Ng5izrKu1Xu2GuTxkmD2g9ZEudNSn4TDH1jSeE9hANgkDX8/pub?gid=2092317482&single=true&output=csv',
+  lisboa: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQeR8SyKPjwgtfgmu1djrhu6JLLryiv7Ng5izrKu1Xu2GuTxkmD2g9ZEudNSn4TDH1jSeE9hANgkDX8/pub?gid=475471856&single=true&output=csv',
+  porto: '',     // ← cole aqui o link CSV da aba do Porto
+  londres: '',
+  paris: '',
+};
 
-// Lista de fallback: aparece se o Sheets não estiver configurado ou falhar
-const FALLBACK = [
-  // secao, grupo, texto, link, link_extra, link_extra_texto
-  ['resolver','','31/07: sai a programação do Doors Open Days. Conferir se o Carlowrie Castle (ou outros lugares fechados e pagos) abre no fim de semana 26 e 27.','https://www.doorsopendays.org.uk/','',''],
-  ['resolver','','Pub crawl escolhido: O Pub Crawl Original. Decidir a noite lá: sexta ou sábado.','https://www.getyourguide.com/edimburgo-l44/o-pub-crawl-original-de-edimburgo-t406992/','',''],
-  ['resolver','','Tour noturno decidido: nenhum! Vamos passar pelos lugares a pé mesmo 👻','','',''],
-  ['resolver','','Malas antes do check-in: £3,75 por bag por dia ✅','','',''],
-  ['resolver','','Bolsa Islander??','','',''],
-
-  ['salvos','bares',"Finnegan's Wake · £10 a 20 · Pub vibe Irish, Guinness",'https://maps.app.goo.gl/Amd7vKyoijNauuYd8','http://www.spccs1.co.uk/MenuPdf/Drinks%20Menu%20-%20C1%20-%20W4%20-%20Scotland.pdf?date=20260718093847','Menu'],
-  ['salvos','bares','Scotsmans Lounge · £1 a 20 · Música ao vivo, Guinness','https://maps.app.goo.gl/HD9baZ9TVmR8RS7M7','',''],
-  ['salvos','bares','Frankenstein Bar · £10 a 20','https://maps.app.goo.gl/P9vDshYntpBma8sr5','',''],
-  ['salvos','bares','Whistlebinkies · £10 a 20 · Rockzinhoo!!','https://maps.app.goo.gl/ZydEtmhFRUYQRPvT8','',''],
-  ['salvos','bares','Cabaret Voltaire · Pub noturno, subterrâneo','https://maps.app.goo.gl/V55f3aaKjsczx4Y87','',''],
-
-  ['salvos','comida','The Three Sisters · £10 a 20 · Pizza margarita £7,50 // é bar e boate tbm!','https://maps.app.goo.gl/aSusNzNWBkEiE4996','',''],
-  ['salvos','comida','Faceplants · £10 a 20','https://maps.app.goo.gl/B9qanhidQUf8ZosEA','',''],
-  ['salvos','comida','Soul Vegan · £20 a 30','https://maps.app.goo.gl/cpbf1XSMQuCG5QVz9','',''],
-  ['salvos','comida','Sly Fox · £10 a 20','https://maps.app.goo.gl/G84kNRD6nGMTVqYC8','',''],
-
-  ['salvos','cafes','Waterstones · Temos que ir!! Vista linda, livros e café','https://maps.app.goo.gl/bFfvS3irDyFkvyQt5','',''],
-  ['salvos','cafes','The Elephant House · Temos que ir!! Café de HP','https://maps.app.goo.gl/TVQpcsaAYT9eTtPp8','',''],
-  ['salvos','cafes','Black Rabbit · £1 a 10','https://maps.app.goo.gl/t9WD787NkCwRDodz6','',''],
-  ['salvos','cafes','Babyfaced Baker · £1 a 10','https://maps.app.goo.gl/w85ct2rRhQhvoQpc8','',''],
-
-  ['salvos','lugares','Victoria Street · casinhas coloridas, beco diagonal','https://maps.app.goo.gl/xziRMXWDgC7ACZxU7','',''],
-  ['salvos','lugares','Princes Street Gardens','https://maps.app.goo.gl/EJjoKrhNxpYmabPH8','',''],
-  ['salvos','lugares','Old Town','https://maps.app.goo.gl/zhwoja5ZYqgbVsps5','',''],
-  ['salvos','lugares','The University of Edinburgh','https://maps.app.goo.gl/1EqdUhGFoARCAE486','',''],
-  ['salvos','lugares','Dean Bridge','https://maps.app.goo.gl/VurT59s31k7eAB5s8','',''],
-  ['salvos','lugares','Greyfriars Kirkyard Cemetery // bloody mackenzie','https://maps.app.goo.gl/a4MGFfKnQhawf3Vc9','https://maps.app.goo.gl/o9V3cfV1Ga6Jiy4G8',"Tom Riddle's Grave"],
-  ['salvos','lugares','Scott Monument','https://maps.app.goo.gl/NyjWxAZNRKiR2JW79','',''],
-  ['salvos','lugares','Old Tolbooth','https://maps.app.goo.gl/soaFjpzkWX2E4kAH9','',''],
-  ['salvos','lugares','Carlowrie Castle','https://maps.app.goo.gl/XMzuLQXf2BRWEUKH9','',''],
-  ['salvos','lugares','Edinburgh Castle · Ver de onde tirar as fotos','https://maps.app.goo.gl/BksfKz9TUy164MMf6','',''],
-  ['salvos','lugares','Royal Mile','https://maps.app.goo.gl/WF1so7hj3F3Mt8TU7','',''],
-  ['salvos','lugares',"Arthur's Seat (vulcão)",'','',''],
-  ['salvos','lugares','Nor Loch · usado para condenar bruxas e deixar corpos de pessoas que não podiam pagar para ser enterradas','','',''],
-  ['salvos','lugares','Casas subterrâneas','','',''],
-  ['salvos','lugares','Queensferry','','',''],
-  ['salvos','lugares','Doors Open Days · vários lugares históricos abertos ao público, ficar de olho que abre dia 31 de julho','https://www.doorsopendays.org.uk/','',''],
-
-  ['salvos','lojas','The Gently Mad','https://maps.app.goo.gl/VweP3Bi1ugTNguxs5','',''],
-];
+// Escapa texto pra HTML seguro
+function esc(s){
+  return (s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
+}
 
 // Parser simples de CSV (aguenta vírgulas dentro de "aspas")
 function parseCSV(txt){
@@ -872,12 +921,19 @@ function parseCSV(txt){
   return linhas;
 }
 
-// Escapa texto pra HTML seguro
-function esc(s){
-  return (s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
+// Converte CSV com cabeçalho em array de objetos {coluna: valor}
+function csvParaObjetos(txt){
+  const linhas = parseCSV(txt);
+  if (linhas.length === 0) return [];
+  const cabecalho = linhas.shift().map(c => c.trim().toLowerCase());
+  return linhas.map(l => {
+    const obj = {};
+    cabecalho.forEach((c, i) => obj[c] = (l[i] || '').trim());
+    return obj;
+  }).filter(o => Object.values(o).some(v => v));
 }
 
-// Monta um <p> de Salvos: [texto] · [link_extra_texto] (se tiver)
+// Monta um <p> de Salvos com até 2 links
 function linhaSalvos(texto, link, linkExtra, linkExtraTexto){
   let html = link ? `<a href="${esc(link)}" target="_blank" rel="noopener">${esc(texto)}</a>` : esc(texto);
   if (linkExtra && linkExtraTexto) {
@@ -888,44 +944,167 @@ function linhaSalvos(texto, link, linkExtra, linkExtraTexto){
 
 // Monta um item do Resolver
 function linhaResolver(texto, link){
-  let corpo = esc(texto);
-  if (link) {
-    // se o link existir, embrulha o texto todo com link
-    corpo = `<a href="${esc(link)}" target="_blank" rel="noopener">${esc(texto)}</a>`;
-  }
+  let corpo = link
+    ? `<a href="${esc(link)}" target="_blank" rel="noopener">${esc(texto)}</a>`
+    : esc(texto);
   return `<div class="check"><div class="box">✓</div><div class="txt">${corpo}</div></div>`;
 }
 
-// Distribui os dados nos containers da página
-function renderizar(dados){
-  const grupos = { resolver: [], bares: [], comida: [], cafes: [], lugares: [], lojas: [] };
-  dados.forEach(([secao, grupo, texto, link, linkExtra, linkExtraTexto, ativo]) => {
-    if (!texto) return;
-    if (ativo && ativo.toLowerCase() === 'nao') return;
-    if (secao === 'resolver') {
-      grupos.resolver.push(linhaResolver(texto, link));
-    } else if (secao === 'salvos' && grupos[grupo] !== undefined) {
-      grupos[grupo].push(linhaSalvos(texto, link, linkExtra, linkExtraTexto));
-    }
-  });
-  const ids = { resolver:'lista-resolver', bares:'lista-bares', comida:'lista-comida', cafes:'lista-cafes', lugares:'lista-lugares', lojas:'lista-lojas' };
-  Object.keys(ids).forEach(k => {
-    const el = document.getElementById(ids[k]);
-    if (el) el.innerHTML = grupos[k].join('') || '<p style="opacity:.6">(vazio)</p>';
-  });
-  // Reaplica o comportamento de check nas linhas do Resolver
-  ligarChecksSalvos();
+// Renderiza uma linha do roteiro dia a dia
+function linhaRoteiro(item){
+  const link = item.link
+    ? `<a href="${esc(item.link)}" target="_blank" rel="noopener">${esc(item.ponto)}</a>`
+    : esc(item.ponto);
+  const nota = item.nota ? `<div class="nota">${esc(item.nota).replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>')}</div>` : '';
+  return `<div class="stop"><div class="box">✓</div><div class="info"><div class="oq">${link}</div>${nota}</div></div>`;
 }
 
-// Depois de renderizar o Resolver, precisamos religar os checks (que rodam no bloco mais abaixo)
-function ligarChecksSalvos(){
-  document.querySelectorAll('#lista-resolver .check').forEach(item => {
+// Monta o accordion de dias a partir das linhas de "roteiro"
+function montarDias(itens, containerId, abrirPrimeiro){
+  const cont = document.getElementById(containerId);
+  if (!cont) return;
+  // Agrupa por dia
+  const porDia = {};
+  const ordemDias = [];
+  itens.forEach(it => {
+    if (!it.dia) return;
+    if (!porDia[it.dia]) { porDia[it.dia] = []; ordemDias.push(it.dia); }
+    porDia[it.dia].push(it);
+  });
+  if (ordemDias.length === 0) {
+    cont.innerHTML = '<p style="text-align:center;color:var(--brown);font-style:italic">Roteiro ainda em construção — em breve!</p>';
+    return;
+  }
+  const html = ordemDias.map((dia, idx) => {
+    const paradas = porDia[dia];
+    const primeira = paradas[0];
+    const data = primeira.data || dia;
+    const titulo = primeira.titulo || '';
+    const subtitulo = primeira.subtitulo || '';
+    const intro = primeira.intro || '';
+    // custo do dia: pega o primeiro valor preenchido em "custo_dia"
+    const custo = paradas.find(p => p.custo_dia)?.custo_dia || '';
+    // Agrupa por período mantendo a ordem que aparece
+    const periodos = [];
+    const porPeriodo = {};
+    paradas.forEach(p => {
+      const per = p.periodo || '';
+      if (!porPeriodo[per]) { porPeriodo[per] = []; periodos.push(per); }
+      porPeriodo[per].push(p);
+    });
+    const corpo = periodos.map(per => {
+      const cabecalho = per ? `<p class="periodo">${esc(per)}</p>` : '';
+      const stops = porPeriodo[per].map(linhaRoteiro).join('');
+      return cabecalho + stops;
+    }).join('');
+    const introHtml = intro ? `<p class="intro">${esc(intro)}</p>` : '';
+    const custoHtml = custo ? `<p class="custo">${esc(custo)}</p>` : '';
+    return `
+      <div class="day ${idx === 0 && abrirPrimeiro ? 'open' : ''}">
+        <button>
+          <span class="data">${esc(data)}</span>
+          <span><span class="nome">${esc(titulo)}</span><br><span class="sub">${esc(subtitulo)}</span></span>
+          <span class="seta">▾</span>
+        </button>
+        <div class="corpo">
+          ${introHtml}
+          ${corpo}
+          ${custoHtml}
+        </div>
+      </div>
+    `;
+  }).join('');
+  cont.innerHTML = html;
+  // Religa accordions e checks
+  cont.querySelectorAll('.day > button').forEach(btn => {
+    btn.addEventListener('click', () => btn.parentElement.classList.toggle('open'));
+  });
+  ligarChecksNovos(cont);
+}
+
+// Renderiza um card de "info" (hostel, transporte etc) a partir de linhas com {campo, valor}
+function montarInfoCard(itens, containerId){
+  const el = document.getElementById(containerId);
+  if (!el) return;
+  if (itens.length === 0) {
+    el.innerHTML = '<p style="opacity:.6;font-style:italic">Ainda não preenchido</p>';
+    return;
+  }
+  const html = itens.map(it => {
+    const texto = it.texto || it.valor || '';
+    const link = it.link || '';
+    const conteudo = link
+      ? `<a href="${esc(link)}" target="_blank" rel="noopener">${esc(texto).replace(/\n/g,'<br>')}</a>`
+      : esc(texto).replace(/\n/g,'<br>').replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+    return `<p>${conteudo}</p>`;
+  }).join('');
+  el.innerHTML = html;
+}
+
+// Distribui os dados nos containers de uma cidade
+function renderizarCidade(cidade, dados){
+  const prefixo = cidade === 'edimburgo' ? '' : cidade + '-';
+  const idResolver = cidade === 'edimburgo' ? 'lista-resolver' : 'resolver-' + cidade;
+  const idBares    = cidade === 'edimburgo' ? 'lista-bares'    : cidade + '-bares';
+  const idComida   = cidade === 'edimburgo' ? 'lista-comida'   : cidade + '-comida';
+  const idCafes    = cidade === 'edimburgo' ? 'lista-cafes'    : cidade + '-cafes';
+  const idLugares  = cidade === 'edimburgo' ? 'lista-lugares'  : cidade + '-lugares';
+  const idLojas    = cidade === 'edimburgo' ? 'lista-lojas'    : cidade + '-lojas';
+
+  const listas = { resolver: [], bares: [], comida: [], cafes: [], lugares: [], lojas: [] };
+  const roteiro = [];
+  const hostel = [];
+  const transporte = [];
+
+  dados.forEach(item => {
+    // Só pula se ativo for explicitamente "nao"
+    if ((item.ativo || '').toLowerCase() === 'nao') return;
+    const secao = (item.secao || '').toLowerCase();
+    if (secao === 'resolver') {
+      if (item.texto) listas.resolver.push(linhaResolver(item.texto, item.link));
+    } else if (secao === 'salvos') {
+      const g = (item.grupo || '').toLowerCase();
+      if (listas[g] !== undefined && item.texto) {
+        listas[g].push(linhaSalvos(item.texto, item.link, item.link_extra, item.link_extra_texto));
+      }
+    } else if (secao === 'roteiro') {
+      if (item.ponto) roteiro.push(item);
+    } else if (secao === 'hostel' || secao === 'hospedagem') {
+      hostel.push(item);
+    } else if (secao === 'transporte') {
+      transporte.push(item);
+    }
+  });
+
+  // Resolver
+  const elResolver = document.getElementById(idResolver);
+  if (elResolver) {
+    elResolver.innerHTML = listas.resolver.join('') || '<p style="opacity:.6;font-style:italic">Ainda não tem nada aqui</p>';
+    ligarChecksNovos(elResolver);
+  }
+  // Salvos
+  [['bares',idBares],['comida',idComida],['cafes',idCafes],['lugares',idLugares],['lojas',idLojas]].forEach(([g,id]) => {
+    const el = document.getElementById(id);
+    if (el) el.innerHTML = listas[g].join('') || '<p style="opacity:.6">(vazio)</p>';
+  });
+
+  // Só cidades que têm essas seções (Lisboa, Porto, etc)
+  if (cidade !== 'edimburgo') {
+    montarInfoCard(hostel, 'hostel-' + cidade);
+    montarInfoCard(transporte, 'transporte-' + cidade);
+    montarDias(roteiro, 'dias-' + cidade, true);
+  }
+}
+
+// Religa os checks de uma área específica (usado após render dinâmico)
+function ligarChecksNovos(area){
+  area.querySelectorAll('.stop, .check').forEach(item => {
     if (item.dataset.ligado) return;
     item.dataset.ligado = '1';
-    const id = (item.querySelector('.txt')?.textContent || '').trim().slice(0, 60);
+    const id = (item.querySelector('.oq, .txt')?.textContent || '').trim().slice(0, 60);
     if (window._salvosChecks && window._salvosChecks.includes(id)) item.classList.add('done');
     item.addEventListener('click', (e) => {
-      if (e.target.closest('a')) return;
+      if (e.target.closest('a') || e.target.closest('.opcao')) return;
       item.classList.toggle('done');
       if (item.classList.contains('done')) {
         if (!window._salvosChecks.includes(id)) window._salvosChecks.push(id);
@@ -937,22 +1116,36 @@ function ligarChecksSalvos(){
   });
 }
 
-// Busca a planilha, ou usa o fallback
-(function carregarDados(){
-  if (!SHEET_CSV_URL) {
-    renderizar(FALLBACK);
+// Fallback de Edimburgo (caso a planilha não carregue)
+const FALLBACK_EDIMBURGO = [
+  {secao:'resolver',texto:'31/07: sai a programação do Doors Open Days. Conferir se o Carlowrie Castle (ou outros lugares fechados e pagos) abre no fim de semana 26 e 27.',link:'https://www.doorsopendays.org.uk/'},
+  {secao:'resolver',texto:'Pub crawl escolhido: O Pub Crawl Original. Decidir a noite lá: sexta ou sábado.',link:'https://www.getyourguide.com/edimburgo-l44/o-pub-crawl-original-de-edimburgo-t406992/'},
+  {secao:'resolver',texto:'Tour noturno decidido: nenhum! Vamos passar pelos lugares a pé mesmo 👻'},
+  {secao:'resolver',texto:'Malas antes do check-in: £3,75 por bag por dia ✅'},
+  {secao:'resolver',texto:'Bolsa Islander??'},
+];
+
+// Carrega os dados de cada cidade
+function carregarCidade(cidade){
+  const url = SHEETS[cidade];
+  if (!url) {
+    if (cidade === 'edimburgo') renderizarCidade('edimburgo', FALLBACK_EDIMBURGO);
     return;
   }
-  fetch(SHEET_CSV_URL)
+  fetch(url)
     .then(r => r.ok ? r.text() : Promise.reject('falhou'))
     .then(txt => {
-      const linhas = parseCSV(txt);
-      // remove o cabeçalho
-      linhas.shift();
-      renderizar(linhas);
+      const dados = csvParaObjetos(txt);
+      console.log(`[${cidade}] ${dados.length} linhas carregadas`, dados);
+      renderizarCidade(cidade, dados);
     })
-    .catch(() => renderizar(FALLBACK));
-})();
+    .catch((e) => {
+      console.warn(`[${cidade}] erro ao carregar planilha:`, e);
+      if (cidade === 'edimburgo') renderizarCidade('edimburgo', FALLBACK_EDIMBURGO);
+    });
+}
+
+Object.keys(SHEETS).forEach(carregarCidade);
 
 
 const navBtns = document.querySelectorAll('nav button');
