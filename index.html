@@ -70,7 +70,10 @@ nav button:focus-visible{outline:2px solid var(--cream);outline-offset:2px}
 }
 .city-links{
   position:relative;z-index:1;
-  display:flex;flex-direction:column;gap:12px;width:100%;max-width:320px;
+  display:flex;flex-direction:column;gap:10px;width:100%;max-width:280px;
+}
+.city-links button{
+  min-width:0;
 }
 .city-links button{
   font-family:var(--display);font-weight:700;
@@ -85,6 +88,7 @@ nav button:focus-visible{outline:2px solid var(--cream);outline-offset:2px}
 .city-links button small{
   display:block;font-family:var(--body);font-weight:400;
   font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--brown);
+  white-space:nowrap;
 }
 
 @media (prefers-reduced-motion:reduce){
@@ -446,7 +450,7 @@ footer{
 @media (min-width:640px){
   nav{padding:12px 32px;gap:10px}
   nav button{font-size:14px}
-  .city-links{flex-direction:row;max-width:640px;justify-content:center}
+  .city-links{flex-direction:row;flex-wrap:wrap;max-width:820px;justify-content:center}
   .city-links button{flex:1}
 }
 </style>
@@ -455,6 +459,8 @@ footer{
 
 <nav>
   <button data-page="home">Home</button>
+  <button data-page="lisboa">Lisboa</button>
+  <button data-page="porto">Porto</button>
   <button data-page="edimburgo">Edimburgo</button>
   <button data-page="londres">Londres</button>
   <button data-page="paris">Paris</button>
@@ -464,9 +470,33 @@ footer{
 <div class="page active" id="home">
   <h1>Are you ready?</h1>
   <div class="city-links">
+    <button data-page="lisboa">Lisboa <small>22 a 24 set</small></button>
+    <button data-page="porto">Porto <small>24 set</small></button>
     <button data-page="edimburgo">Edimburgo <small>25 a 28 set</small></button>
-    <button data-page="londres">Londres <small>em breve</small></button>
-    <button data-page="paris">Paris <small>em breve</small></button>
+    <button data-page="londres">Londres <small>29 set a 02 out</small></button>
+    <button data-page="paris">Paris <small>03 a 06 out</small></button>
+  </div>
+</div>
+
+<!-- ============ LISBOA ============ -->
+<div class="page" id="lisboa">
+  <div class="placeholder">
+    <h2>Lisboa</h2>
+    <p style="font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--brown)">22 (noite) a 24 de setembro</p>
+    <p class="loading-dots">Carregando o roteiro de Lisboa</p>
+    <div class="loading-bar"></div>
+    <p style="margin-top:22px;font-size:13px;color:var(--brown);max-width:320px">Bus pro Porto dia 24 às 07h ✈️</p>
+  </div>
+</div>
+
+<!-- ============ PORTO ============ -->
+<div class="page" id="porto">
+  <div class="placeholder">
+    <h2>Porto</h2>
+    <p style="font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--brown)">24 de setembro</p>
+    <p class="loading-dots">Carregando o roteiro do Porto</p>
+    <div class="loading-bar"></div>
+    <p style="margin-top:22px;font-size:13px;color:var(--brown);max-width:320px">Dia inteiro no Porto. Voo pra Edimburgo às 21h45 ✈️</p>
   </div>
 </div>
 
@@ -747,8 +777,10 @@ footer{
 <div class="page" id="londres">
   <div class="placeholder">
     <h2>London</h2>
+    <p style="font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--brown)">29 de setembro a 02 de outubro</p>
     <p class="loading-dots">Carregando o roteiro de Londres</p>
     <div class="loading-bar"></div>
+    <p style="margin-top:22px;font-size:13px;color:var(--brown);max-width:320px">Voo de Edimburgo às 06h20 do dia 29 ✈️<br>FlixBus pra Paris às 23h59 do dia 02 🚌</p>
   </div>
 </div>
 
@@ -756,8 +788,10 @@ footer{
 <div class="page" id="paris">
   <div class="placeholder">
     <h2>Paris</h2>
+    <p style="font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--brown)">03 a 06 de outubro</p>
     <p class="loading-dots">Carregando o roteiro de Paris</p>
     <div class="loading-bar"></div>
+    <p style="margin-top:22px;font-size:13px;color:var(--brown);max-width:320px">Chegada vinda de Londres na manhã do dia 03, de FlixBus 🚌</p>
   </div>
 </div>
 
