@@ -580,13 +580,6 @@ footer{
     <div class="desce">↓</div>
   </div>
 
-  <section class="wrap">
-    <h3 class="titulo">Bagagem &amp; base</h3>
-    <div class="card" id="hostel-porto">
-      <p class="loading-dots" style="color:var(--cream)">Carregando</p>
-    </div>
-  </section>
-
   <div class="scallop gold" style="transform:scaleY(-1);background-color:var(--cream)"></div>
   <section class="gold-bg" style="background:var(--gold)">
     <div class="wrap">
@@ -994,9 +987,14 @@ function csvParaObjetos(txt){
   }).filter(o => Object.values(o).some(v => v));
 }
 
+// Converte marcadores [texto](url) em <a>. Assume que txt já passou por esc().
+function inlineLinks(txt){
+  return txt.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+}
+
 // Monta um <p> de Salvos com até 2 links
 function linhaSalvos(texto, link, linkExtra, linkExtraTexto){
-  let html = link ? `<a href="${esc(link)}" target="_blank" rel="noopener">${esc(texto)}</a>` : esc(texto);
+  let html = link ? `<a href="${esc(link)}" target="_blank" rel="noopener">${inlineLinks(esc(texto))}</a>` : inlineLinks(esc(texto));
   if (linkExtra && linkExtraTexto) {
     html += ` · <a href="${esc(linkExtra)}" target="_blank" rel="noopener">${esc(linkExtraTexto)}</a>`;
   }
@@ -1006,8 +1004,8 @@ function linhaSalvos(texto, link, linkExtra, linkExtraTexto){
 // Monta um item do Resolver
 function linhaResolver(texto, link){
   let corpo = link
-    ? `<a href="${esc(link)}" target="_blank" rel="noopener">${esc(texto)}</a>`
-    : esc(texto);
+    ? `<a href="${esc(link)}" target="_blank" rel="noopener">${inlineLinks(esc(texto))}</a>`
+    : inlineLinks(esc(texto));
   return `<div class="check"><div class="box">✓</div><div class="txt">${corpo}</div></div>`;
 }
 
