@@ -91,6 +91,31 @@ nav button:focus-visible{outline:2px solid var(--cream);outline-offset:2px}
   white-space:nowrap;
 }
 
+/* Card "Total estimado" nos Must know: breakdown por cidade + total */
+.total-card{font-size:14px}
+.total-card .linha{
+  display:flex;justify-content:space-between;align-items:baseline;gap:12px;
+  padding:6px 0;border-bottom:1px dashed currentColor;opacity:.9;
+}
+.total-card .linha:last-of-type{border-bottom:none}
+.total-card .linha.atual{font-weight:600;opacity:1}
+.total-card .linha.pendente{opacity:.55;font-style:italic}
+.total-card .linha .cidade{letter-spacing:.03em}
+.total-card .linha .valor{font-family:var(--display);font-weight:700;white-space:nowrap}
+.total-card .geral{
+  margin-top:12px;padding-top:12px;border-top:2px solid currentColor;
+}
+.total-card .geral .rotulo{
+  font-size:11px;letter-spacing:.14em;text-transform:uppercase;opacity:.7;
+  margin-bottom:4px;text-align:center;
+}
+.total-card .geral .valor{
+  font-family:var(--display);font-weight:700;font-size:1.4rem;text-align:center;display:block;
+}
+.total-card .nota{
+  font-size:11px;opacity:.7;margin-top:12px;line-height:1.4;text-align:center;
+}
+
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .city-links button:hover{transform:none}
@@ -533,6 +558,10 @@ footer{
         <h4>🧙 Resolver</h4>
         <div id="resolver-lisboa"><div class="check-loading">Carregando lista…</div></div>
       </div>
+      <div class="card">
+        <h4>💰 Total estimado</h4>
+        <div id="custo-total-lisboa"><p style="opacity:.6">Calculando…</p></div>
+      </div>
     </div>
   </section>
   <div class="scallop" style="background-color:var(--cream)"></div>
@@ -586,6 +615,10 @@ footer{
         <h4>🧙 Resolver</h4>
         <div id="resolver-porto"><div class="check-loading">Carregando lista…</div></div>
       </div>
+      <div class="card">
+        <h4>💰 Total estimado</h4>
+        <div id="custo-total-porto"><p style="opacity:.6">Calculando…</p></div>
+      </div>
     </div>
   </section>
   <div class="scallop gold" style="background-color:var(--cream)"></div>
@@ -620,7 +653,7 @@ footer{
       <source src="hero%20edimburgo%20-%20web.mp4" type="video/mp4">
     </video>
     <div class="hero-conteudo">
-      <h2>Scotland</h2>
+      <h2>Edimburgo</h2>
       <p>25 a 28 de setembro de 2026</p>
     </div>
     <div class="desce">↓</div>
@@ -707,6 +740,12 @@ footer{
           <div class="check-loading">Carregando lista…</div>
         </div>
       </div>
+
+      <!-- total estimado da cidade -->
+      <div class="card">
+        <h4>💰 Total estimado</h4>
+        <div id="custo-total-edimburgo"><p style="opacity:.6">Calculando…</p></div>
+      </div>
     </div>
   </section>
   <div class="scallop gold" style="background-color:var(--cream)"></div>
@@ -714,6 +753,7 @@ footer{
   <!-- ITINERÁRIO -->
   <section class="wrap">
     <h3 class="titulo">Roteiro dia a dia</h3>
+    <div id="dias-edimburgo">
 
     <!-- SEX 25 -->
     <div class="day open">
@@ -844,6 +884,7 @@ footer{
 
         <p class="custo">💰 Dia: ~£30 (café + trem + pint + comida)</p>
       </div>
+    </div>
     </div>
   </section>
 
@@ -1122,7 +1163,91 @@ function renderizarCidade(cidade, dados){
     montarInfoCard(transporte, 'transporte-' + cidade);
     montarDias(roteiro, 'dias-' + cidade, true);
   }
+  calcTotalCidade(cidade);
 }
+
+// Registro dos totais de cada cidade (min/max/moeda). Preenchido conforme cada
+// cidade renderiza. A ordem aqui é a ordem da viagem (usada na exibição).
+const ORDEM_CIDADES = ['lisboa', 'porto', 'edimburgo', 'londres', 'paris'];
+const NOMES_CIDADES = {
+  lisboa: 'Lisboa', porto: 'Porto', edimburgo: 'Edimburgo',
+  londres: 'Londres', paris: 'Paris'
+};
+window._totaisCidades = window._totaisCidades || {};
+
+// Lê os .custo dentro de #dias-<cidade>, soma min e max, detecta a moeda.
+// Salva em _totaisCidades e re-renderiza os cards de todas as cidades.
+function calcTotalCidade(cidade){
+  const dias = document.getElementById('dias-' + cidade);
+  if (dias) {
+    const custos = [...dias.querySelectorAll('.custo')].map(el => el.textContent);
+    if (custos.length === 0) {
+      delete window._totaisCidades[cidade];
+    } else {
+      let moeda = '';
+      let totalMin = 0, totalMax = 0;
+      custos.forEach(c => {
+        const m = c.match(/[€£$]/);
+        if (m && !moeda) moeda = m[0];
+        const nums = (c.match(/\d+(?:[.,]\d+)?/g) || []).map(n => parseFloat(n.replace(',', '.')));
+        if (nums.length === 0) return;
+        if (nums.length === 1) { totalMin += nums[0]; totalMax += nums[0]; }
+        else { totalMin += Math.min(...nums); totalMax += Math.max(...nums); }
+      });
+      window._totaisCidades[cidade] = { moeda: moeda || '€', min: totalMin, max: totalMax, dias: custos.length };
+    }
+  }
+  renderTodosOsTotais();
+}
+
+// Formata "€120" ou "€100 a 130"
+function fmtValor(moeda, mi, ma){
+  const a = Math.round(mi), b = Math.round(ma);
+  return a === b ? `${moeda}${a}` : `${moeda}${a} a ${b}`;
+}
+
+// Renderiza o breakdown completo em cada #custo-total-<cidade>, destacando
+// a cidade atual (a que "possui" aquele card).
+function renderTodosOsTotais(){
+  // Soma geral agrupada por moeda
+  const porMoeda = {};
+  Object.entries(window._totaisCidades).forEach(([_, t]) => {
+    if (!t.moeda) return;
+    if (!porMoeda[t.moeda]) porMoeda[t.moeda] = { min: 0, max: 0 };
+    porMoeda[t.moeda].min += t.min;
+    porMoeda[t.moeda].max += t.max;
+  });
+  const linhasGeral = Object.entries(porMoeda).map(([m, v]) => fmtValor(m, v.min, v.max));
+  const totalGeralHtml = linhasGeral.length
+    ? linhasGeral.join(' + ')
+    : 'Aguardando os roteiros…';
+
+  ORDEM_CIDADES.forEach(cidadeAtual => {
+    const alvo = document.getElementById('custo-total-' + cidadeAtual);
+    if (!alvo) return;
+
+    const linhas = ORDEM_CIDADES.map(c => {
+      const t = window._totaisCidades[c];
+      const nome = NOMES_CIDADES[c];
+      const classe = c === cidadeAtual ? 'linha atual' : (t ? 'linha' : 'linha pendente');
+      const valor = t ? fmtValor(t.moeda, t.min, t.max) : '—';
+      return `<div class="${classe}"><span class="cidade">${nome}</span><span class="valor">${valor}</span></div>`;
+    }).join('');
+
+    alvo.classList.add('total-card');
+    alvo.innerHTML = `
+      ${linhas}
+      <div class="geral">
+        <div class="rotulo">Total da viagem</div>
+        <span class="valor">${totalGeralHtml}</span>
+      </div>
+      <p class="nota">Comida, ingressos e atrações dos roteiros. EUR e GBP contadas separadas. Não inclui transporte, hospedagem nem tours/pub crawl.</p>
+    `;
+  });
+}
+
+// Roda uma vez no boot pra deixar os cards já com "—" enquanto as cidades carregam.
+renderTodosOsTotais();
 
 // Religa os checks de uma área específica (usado após render dinâmico)
 function ligarChecksNovos(area){
