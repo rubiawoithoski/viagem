@@ -127,19 +127,19 @@ section{padding:44px 0}
 
 .city-hero{
   position:relative;overflow:hidden;
-  background:var(--olive);
+  background:linear-gradient(160deg, #5a5330 0%, var(--olive) 55%, #35310f 100%);
   color:var(--cream);text-align:center;
   min-height:100vh;min-height:100svh;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   padding:72px 18px 56px;
 }
-.hero-video{
+.hero-gif, .hero-video{
   position:absolute;inset:0;width:100%;height:100%;
   object-fit:cover;z-index:0;
 }
 .city-hero::after{
   content:'';position:absolute;inset:0;z-index:1;
-  background:rgba(74,68,31,.55);
+  background:rgba(74,68,31,.4);
 }
 .hero-conteudo{position:relative;z-index:2}
 .desce{
@@ -156,23 +156,6 @@ section{padding:44px 0}
   letter-spacing:.08em;
 }
 .city-hero p{margin-top:10px;font-size:14px;letter-spacing:.14em;text-transform:uppercase}
-
-.city-hero-lisboa, .city-hero-porto{
-  background:linear-gradient(160deg, #5a5330 0%, var(--olive) 55%, #35310f 100%);
-}
-.city-hero-lisboa::before, .city-hero-porto::before{display:none}
-.hero-gif{
-  position:absolute;inset:0;width:100%;height:100%;
-  object-fit:cover;z-index:0;
-}
-.city-hero-lisboa::after, .city-hero-porto::after{
-  content:'';position:absolute;inset:0;z-index:1;
-  background:rgba(74,68,31,.35);
-}
-.city-hero-lisboa .hero-conteudo,
-.city-hero-porto .hero-conteudo{position:relative;z-index:2}
-.city-hero-lisboa .desce,
-.city-hero-porto .desce{z-index:2}
 
 /* scallop, o babadinho do PDF */
 .scallop{
@@ -589,6 +572,7 @@ footer{
 <!-- ============ PORTO ============ -->
 <div class="page" id="porto">
   <div class="city-hero city-hero-porto">
+    <img class="hero-gif" src="porto.gif" alt="Porto" onerror="this.style.display='none'">
     <div class="hero-conteudo">
       <h2>Porto</h2>
       <p>24 de setembro</p>
@@ -646,12 +630,8 @@ footer{
 <!-- ============ EDIMBURGO ============ -->
 <div class="page" id="edimburgo">
 
-  <div class="city-hero">
-    <!-- VÍDEO DE FUNDO: versão mobile em telas pequenas, versão web nas maiores -->
-    <video class="hero-video" autoplay muted loop playsinline>
-      <source src="hero%20edimburgo%20-%20mobile.mp4" type="video/mp4" media="(max-width: 639px)">
-      <source src="hero%20edimburgo%20-%20web.mp4" type="video/mp4">
-    </video>
+  <div class="city-hero city-hero-edimburgo">
+    <img class="hero-gif" src="edimburgo.gif" alt="Edimburgo" onerror="this.style.display='none'">
     <div class="hero-conteudo">
       <h2>Edimburgo</h2>
       <p>25 a 28 de setembro de 2026</p>
@@ -926,9 +906,15 @@ footer{
 
 <!-- ============ LONDRES ============ -->
 <div class="page" id="londres">
+  <div class="city-hero city-hero-londres">
+    <img class="hero-gif" src="londres.gif" alt="Londres" onerror="this.style.display='none'">
+    <div class="hero-conteudo">
+      <h2>Londres</h2>
+      <p>29 de setembro a 02 de outubro</p>
+    </div>
+    <div class="desce">↓</div>
+  </div>
   <div class="placeholder">
-    <h2>London</h2>
-    <p style="font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--brown)">29 de setembro a 02 de outubro</p>
     <p class="loading-dots">Carregando o roteiro de Londres</p>
     <div class="loading-bar"></div>
     <p style="margin-top:22px;font-size:13px;color:var(--brown);max-width:320px">Voo de Edimburgo às 06h20 do dia 29 ✈️<br>FlixBus pra Paris às 23h59 do dia 02 🚌</p>
@@ -937,9 +923,15 @@ footer{
 
 <!-- ============ PARIS ============ -->
 <div class="page" id="paris">
+  <div class="city-hero city-hero-paris">
+    <img class="hero-gif" src="paris.gif" alt="Paris" onerror="this.style.display='none'">
+    <div class="hero-conteudo">
+      <h2>Paris</h2>
+      <p>03 a 06 de outubro</p>
+    </div>
+    <div class="desce">↓</div>
+  </div>
   <div class="placeholder">
-    <h2>Paris</h2>
-    <p style="font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--brown)">03 a 06 de outubro</p>
     <p class="loading-dots">Carregando o roteiro de Paris</p>
     <div class="loading-bar"></div>
     <p style="margin-top:22px;font-size:13px;color:var(--brown);max-width:320px">Chegada vinda de Londres na manhã do dia 03, de FlixBus 🚌</p>
@@ -956,7 +948,7 @@ footer{
 const SHEETS = {
   edimburgo: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQeR8SyKPjwgtfgmu1djrhu6JLLryiv7Ng5izrKu1Xu2GuTxkmD2g9ZEudNSn4TDH1jSeE9hANgkDX8/pub?gid=2092317482&single=true&output=csv',
   lisboa: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQeR8SyKPjwgtfgmu1djrhu6JLLryiv7Ng5izrKu1Xu2GuTxkmD2g9ZEudNSn4TDH1jSeE9hANgkDX8/pub?gid=475471856&single=true&output=csv',
-  porto: '',     // ← cole aqui o link CSV da aba do Porto
+  porto: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQeR8SyKPjwgtfgmu1djrhu6JLLryiv7Ng5izrKu1Xu2GuTxkmD2g9ZEudNSn4TDH1jSeE9hANgkDX8/pub?gid=66682512&single=true&output=csv',
   londres: '',
   paris: '',
 };
