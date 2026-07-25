@@ -144,8 +144,10 @@ section{padding:44px 0}
   content:'';position:absolute;inset:0;z-index:1;
   background:rgba(74,68,31,.35);
 }
-.city-hero-lisboa .hero-conteudo, .city-hero-lisboa .desce,
-.city-hero-porto .hero-conteudo, .city-hero-porto .desce{position:relative;z-index:2}
+.city-hero-lisboa .hero-conteudo,
+.city-hero-porto .hero-conteudo{position:relative;z-index:2}
+.city-hero-lisboa .desce,
+.city-hero-porto .desce{z-index:2}
 
 /* scallop, o babadinho do PDF */
 .scallop{
@@ -164,6 +166,22 @@ h3.titulo{
 }
 .dark h3.titulo{color:var(--gold)}
 .gold-bg h3.titulo{color:var(--cream)}
+
+/* Blocos claros sobre fundo oliva (Lisboa "Must know") */
+.olive-bg h3.titulo{color:var(--cream)}
+.olive-bg .card{background:var(--cream);color:var(--brown)}
+.olive-bg .card h4{color:var(--olive)}
+.olive-bg .card p{color:var(--brown)}
+.olive-bg .card p strong{color:var(--olive)}
+.olive-bg .card p a{color:var(--olive);text-decoration:underline;text-underline-offset:3px}
+.olive-bg .check{color:var(--brown);border-bottom-color:rgba(74,68,31,.15)}
+.olive-bg .check .box{border-color:var(--olive);color:var(--olive)}
+.olive-bg .check.done .box{background:var(--olive);color:var(--cream)}
+.olive-bg .check:hover{border-color:var(--brown)}
+.olive-bg .check .txt strong{color:var(--olive)}
+.olive-bg .check .txt a{color:var(--olive)}
+.olive-bg .card .loading-dots,
+.olive-bg .card .check-loading{color:var(--brown)}
 
 /* ---------- PAINEL HOSTEL ---------- */
 .painel-hostel{
@@ -504,13 +522,12 @@ footer{
     <div class="desce">↓</div>
   </div>
 
-  <div class="scallop gold" style="transform:scaleY(-1);background-color:var(--olive)"></div>
-  <section class="gold-bg" style="background:var(--gold)">
+  <section class="olive-bg" style="background:var(--olive)">
     <div class="wrap">
       <h3 class="titulo">Must know</h3>
       <div class="card">
         <h4>🚌 Transporte</h4>
-        <div id="transporte-lisboa"><p class="loading-dots" style="color:var(--cream)">Carregando</p></div>
+        <div id="transporte-lisboa"><p class="loading-dots">Carregando</p></div>
       </div>
       <div class="card">
         <h4>🧙 Resolver</h4>
@@ -518,7 +535,7 @@ footer{
       </div>
     </div>
   </section>
-  <div class="scallop gold" style="background-color:var(--cream)"></div>
+  <div class="scallop" style="background-color:var(--cream)"></div>
 
   <section class="wrap">
     <h3 class="titulo">Roteiro dia a dia</h3>
