@@ -910,18 +910,25 @@ function montarDias(itens, containerId, abrirPrimeiro){
     const intro = primeira.intro || '';
     // custo do dia: pega o primeiro valor preenchido em "custo_dia"
     const custo = paradas.find(p => p.custo_dia)?.custo_dia || '';
-    // linhas de cabeçalho do dia = linhas SEM "ponto". A primeira traz titulo/subtitulo/intro.
-    // Cada linha de cabeçalho com link_extra + link_extra_texto vira um botão de rota.
-    // A "nota" da mesma linha vira a legenda do botão (.rota-nota).
+    // botões de rota: gerados automaticamente juntando os "ponto" das paradas do dia
+    // no formato path-based do Google Maps (https://www.google.com/maps/dir/A/B/C/)
+    const pontosParaRota = paradas
+      .filter(p => p.ponto && p.ponto.trim())
+      .map(p => p.ponto.trim());
+    // Também aceita botões extras vindos do CSV via link_extra nas linhas SEM ponto
+    // (útil quando quer rota com coordenadas precisas ou dividida em manhã/tarde, tipo Edimburgo)
     const linhasCabec = paradas.filter(p => !p.ponto);
-    const linhaCabecalho = linhasCabec[0];
-    const rotas = linhasCabec.filter(p => p.link_extra && p.link_extra_texto);
-    const rotaHtml = rotas.length
-      ? `<div class="rota">` + rotas.map(r =>
-          `<a class="btn-rota" href="${esc(r.link_extra)}" target="_blank" rel="noopener">${esc(r.link_extra_texto)}</a>` +
-          (r.nota ? `<span class="rota-nota">${esc(r.nota)}</span>` : '')
-        ).join('') + `</div>`
-      : '';
+    const rotasCustom = linhasCabec.filter(p => p.link_extra && p.link_extra_texto);
+    let rotaHtml = '';
+    if (rotasCustom.length) {
+      rotaHtml = `<div class="rota">` + rotasCustom.map(r =>
+        `<a class="btn-rota" href="${esc(r.link_extra)}" target="_blank" rel="noopener">${esc(r.link_extra_texto)}</a>` +
+        (r.nota ? `<span class="rota-nota">${esc(r.nota)}</span>` : '')
+      ).join('') + `</div>`;
+    } else if (pontosParaRota.length >= 2) {
+      const url = 'https://www.google.com/maps/dir/' + pontosParaRota.map(encodeURIComponent).join('/') + '/';
+      rotaHtml = `<div class="rota"><a class="btn-rota" href="${url}" target="_blank" rel="noopener">🗺️ Rota do dia</a></div>`;
+    }
     // Agrupa por período mantendo a ordem que aparece
     const periodos = [];
     const porPeriodo = {};
