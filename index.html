@@ -694,7 +694,7 @@ footer{
       </div>
 
       <!-- transporte -->
-      <div class="card">
+      <div class="card" id="transporte-edimburgo">
         <h4>🚌 Transporte</h4>
         <p><strong>Ônibus urbano (Lothian):</strong> £2,20 por viagem no cartão por aproximação. Usando o mesmo cartão o dia todo, o teto diário é ~£5 automático. <u>Não precisa comprar bilhete.</u></p>
         <p><strong>Aeroporto ↔ centro:</strong> Airlink 100, roda 24h, ~30 min até Waverley Bridge // é a última parada (7 min a pé do hostel).</p>
@@ -702,7 +702,7 @@ footer{
         <p><strong>Queensferry:</strong> trem Haymarket → Dalmeny, ~20 min, ~£5 a 7 ida e volta, + 15 min a pé ladeira abaixo.</p>
         <p><strong>Craigmillar:</strong> ônibus ~20 a 25 min da região da North Bridge + 10 min a pé.</p>
         <p><strong>O resto:</strong> 45 km a pé =D</p>
-        <p style="text-align:center;margin-top:16px"><a class="btn-total" href="https://docs.google.com/spreadsheets/d/1e-H8fAe48Zp1NgKDvl8reH3uWgvau4gWUM8XcMbjdB4/edit?usp=sharing" target="_blank" rel="noopener">Total em transportes: £20/£25</a></p>
+        <p>💰 Total transportes: £20 a 25</p>
       </div>
 
       <!-- resolver: preenchido pela planilha do Google Sheets -->
@@ -809,7 +809,7 @@ const SHEETS = {
   edimburgo: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQeR8SyKPjwgtfgmu1djrhu6JLLryiv7Ng5izrKu1Xu2GuTxkmD2g9ZEudNSn4TDH1jSeE9hANgkDX8/pub?gid=2092317482&single=true&output=csv',
   lisboa: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQeR8SyKPjwgtfgmu1djrhu6JLLryiv7Ng5izrKu1Xu2GuTxkmD2g9ZEudNSn4TDH1jSeE9hANgkDX8/pub?gid=475471856&single=true&output=csv',
   porto: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQeR8SyKPjwgtfgmu1djrhu6JLLryiv7Ng5izrKu1Xu2GuTxkmD2g9ZEudNSn4TDH1jSeE9hANgkDX8/pub?gid=66682512&single=true&output=csv',
-  londres: '',
+  londres: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQeR8SyKPjwgtfgmu1djrhu6JLLryiv7Ng5izrKu1Xu2GuTxkmD2g9ZEudNSn4TDH1jSeE9hANgkDX8/pub?gid=2051310306&single=true&output=csv',
   paris: '',
 };
 
@@ -889,6 +889,21 @@ function linhaRoteiro(item){
 function montarDias(itens, containerId, abrirPrimeiro){
   const cont = document.getElementById(containerId);
   if (!cont) return;
+  // Nome bonito da cidade pra anexar aos pontos da rota (evita puxar Lisboa quando é Edimburgo etc)
+  const cidadeSlug = containerId.replace('dias-', '');
+  const nomeCidade = (typeof NOMES_CIDADES !== 'undefined' && NOMES_CIDADES[cidadeSlug]) || '';
+  // Limpa nome do ponto pra busca no Maps: tira parênteses, emojis, e anexa a cidade se ainda não estiver no nome
+  function limparPontoPraRota(nome){
+    let n = nome
+      .replace(/\s*\([^)]*\)/g, '')                          // remove (parênteses)
+      .replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]/gu, '') // remove a maioria dos emojis
+      .replace(/\s+/g, ' ')
+      .trim();
+    if (nomeCidade && !n.toLowerCase().includes(nomeCidade.toLowerCase())) {
+      n += ', ' + nomeCidade;
+    }
+    return n;
+  }
   // Agrupa por dia
   const porDia = {};
   const ordemDias = [];
@@ -911,10 +926,17 @@ function montarDias(itens, containerId, abrirPrimeiro){
     // custo do dia: pega o primeiro valor preenchido em "custo_dia"
     const custo = paradas.find(p => p.custo_dia)?.custo_dia || '';
     // botões de rota: gerados automaticamente juntando os "ponto" das paradas do dia
-    // no formato path-based do Google Maps (https://www.google.com/maps/dir/A/B/C/)
+    // Regras:
+    //  - Parada com link do Google Maps: entra na rota (limpa parênteses/emojis, anexa cidade)
+    //  - Parada com link externo (getyourguide, booking, etc): FICA FORA — não é um lugar fixo
+    //  - Parada sem link nenhum: entra também (usa só o nome do ponto)
+    function ehLinkMaps(url){
+      if (!url) return true; // sem link também vai
+      return /(?:google\.com\/maps|maps\.google\.com|maps\.app\.goo\.gl|goo\.gl\/maps)/i.test(url);
+    }
     const pontosParaRota = paradas
-      .filter(p => p.ponto && p.ponto.trim())
-      .map(p => p.ponto.trim());
+      .filter(p => p.ponto && p.ponto.trim() && ehLinkMaps(p.link))
+      .map(p => limparPontoPraRota(p.ponto));
     // Também aceita botões extras vindos do CSV via link_extra nas linhas SEM ponto
     // (útil quando quer rota com coordenadas precisas ou dividida em manhã/tarde, tipo Edimburgo)
     const linhasCabec = paradas.filter(p => !p.ponto);
@@ -1014,7 +1036,7 @@ function renderizarCidade(cidade, dados){
         listas[g].push(linhaSalvos(item.texto, item.link, item.link_extra, item.link_extra_texto));
       }
     } else if (secao === 'roteiro') {
-      if (item.ponto) roteiro.push(item);
+      if (item.dia) roteiro.push(item);  // aceita linha de cabeçalho (sem ponto) e linhas de parada (com ponto)
     } else if (secao === 'hostel' || secao === 'hospedagem') {
       hostel.push(item);
     } else if (secao === 'transporte') {
@@ -1056,23 +1078,34 @@ window._totaisCidades = window._totaisCidades || {};
 // Salva em _totaisCidades e re-renderiza os cards de todas as cidades.
 function calcTotalCidade(cidade){
   const dias = document.getElementById('dias-' + cidade);
-  if (dias) {
-    const custos = [...dias.querySelectorAll('.custo')].map(el => el.textContent);
-    if (custos.length === 0) {
-      delete window._totaisCidades[cidade];
-    } else {
-      let moeda = '';
-      let totalMin = 0, totalMax = 0;
-      custos.forEach(c => {
-        const m = c.match(/[€£$]/);
-        if (m && !moeda) moeda = m[0];
-        const nums = (c.match(/\d+(?:[.,]\d+)?/g) || []).map(n => parseFloat(n.replace(',', '.')));
-        if (nums.length === 0) return;
-        if (nums.length === 1) { totalMin += nums[0]; totalMax += nums[0]; }
-        else { totalMin += Math.min(...nums); totalMax += Math.max(...nums); }
-      });
-      window._totaisCidades[cidade] = { moeda: moeda || '€', min: totalMin, max: totalMax, dias: custos.length };
-    }
+  // Custos do ROTEIRO: linhas .custo dentro de #dias-<cidade>
+  const custos = dias ? [...dias.querySelectorAll('.custo')].map(el => el.textContent) : [];
+  // Custos EXTRAS: parágrafos que começam com 💰 dentro dos cards de transporte e hostel
+  const cardsExtras = [];
+  ['transporte-' + cidade, 'hostel-' + cidade].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) cardsExtras.push(el);
+  });
+  cardsExtras.forEach(el => {
+    el.querySelectorAll('p').forEach(p => {
+      const t = p.textContent.trim();
+      if (t.startsWith('💰')) custos.push(t);
+    });
+  });
+  if (custos.length === 0) {
+    delete window._totaisCidades[cidade];
+  } else {
+    let moeda = '';
+    let totalMin = 0, totalMax = 0;
+    custos.forEach(c => {
+      const m = c.match(/[€£$]/);
+      if (m && !moeda) moeda = m[0];
+      const nums = (c.match(/\d+(?:[.,]\d+)?/g) || []).map(n => parseFloat(n.replace(',', '.')));
+      if (nums.length === 0) return;
+      if (nums.length === 1) { totalMin += nums[0]; totalMax += nums[0]; }
+      else { totalMin += Math.min(...nums); totalMax += Math.max(...nums); }
+    });
+    window._totaisCidades[cidade] = { moeda: moeda || '€', min: totalMin, max: totalMax, dias: custos.length };
   }
   renderTodosOsTotais();
 }
@@ -1118,7 +1151,7 @@ function renderTodosOsTotais(){
         <div class="rotulo">Total da viagem</div>
         <span class="valor">${totalGeralHtml}</span>
       </div>
-      <p class="nota">Comida, ingressos e atrações dos roteiros. EUR e GBP contadas separadas. Não inclui transporte, hospedagem nem tours/pub crawl.</p>
+      <p class="nota">Soma os custos marcados com 💰 do roteiro (comida, ingressos, atrações) e do transporte por cidade. EUR e GBP contadas separadas. Não inclui hospedagem, tours ou pub crawl (a menos que você adicione uma linha 💰 pra eles).</p>
     `;
   });
 }
@@ -1162,7 +1195,9 @@ function carregarCidade(cidade){
     if (cidade === 'edimburgo') renderizarCidade('edimburgo', FALLBACK_EDIMBURGO);
     return;
   }
-  fetch(url)
+  // Adiciona timestamp pra forçar bypass do cache do Google Sheets (que pode demorar horas pra atualizar)
+  const urlComCacheBust = url + (url.includes('?') ? '&' : '?') + '_=' + Date.now();
+  fetch(urlComCacheBust)
     .then(r => r.ok ? r.text() : Promise.reject('falhou'))
     .then(txt => {
       const dados = csvParaObjetos(txt);
