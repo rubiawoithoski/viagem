@@ -803,29 +803,29 @@ footer{
     <div class="wrap">
       <h3 class="titulo">Must know</h3>
 
-      <!-- comidas típicas: placeholder pra preencher -->
+      <!-- comidas típicas -->
       <div class="card">
         <h4>🍽️ Comidas típicas</h4>
         <div class="foods">
           <div class="food">
-            <img src="fish-chips.jpg" alt="Fish and Chips" onerror="this.style.display='none'">
-            <button>Prato 1 <span class="seta">›</span></button>
-            <div class="desc">Descrição do prato — preencher.</div>
+            <img src="fish-and-chips.jpg" alt="Fish and Chips" onerror="this.style.display='none'">
+            <button>Fish and Chips <span class="seta">›</span></button>
+            <div class="desc">Peixe empanado + batata frita grossa, com molho tártaro e ervilhas amassadas. A versão veg usa banana blossom, tofu ou seitan. Unity Diner é famoso pelo deles.</div>
           </div>
           <div class="food">
-            <img src="prato-2-londres.jpg" alt="Prato 2" onerror="this.style.display='none'">
-            <button>Prato 2 <span class="seta">›</span></button>
-            <div class="desc">Descrição do prato — preencher.</div>
+            <img src="english-breakfast.jpg" alt="English Breakfast" onerror="this.style.display='none'">
+            <button>English Breakfast <span class="seta">›</span></button>
+            <div class="desc">Feijão, ovo, cogumelo, tomate, salsicha, torrada, hash brown. Café da manhã que segura o dia todo.</div>
           </div>
           <div class="food">
-            <img src="prato-3-londres.jpg" alt="Prato 3" onerror="this.style.display='none'">
-            <button>Prato 3 <span class="seta">›</span></button>
-            <div class="desc">Descrição do prato — preencher.</div>
+            <img src="afternoon-tea.jpg" alt="Afternoon Tea" onerror="this.style.display='none'">
+            <button>Cream Tea / Afternoon Tea <span class="seta">›</span></button>
+            <div class="desc">Chá + scones com clotted cream + geléia. A cerimônia inteira leva ~2h.</div>
           </div>
           <div class="food">
-            <img src="prato-4-londres.jpg" alt="Prato 4" onerror="this.style.display='none'">
-            <button>Prato 4 <span class="seta">›</span></button>
-            <div class="desc">Descrição do prato — preencher.</div>
+            <img src="humble-crumble.jpg" alt="Humble Crumble" onerror="this.style.display='none'">
+            <button>Humble Crumble <span class="seta">›</span></button>
+            <div class="desc">Crumble de maçã com custard quente e casca de açúcar queimada no maçarico, igual crème brûlée. £7 a 10 · barraca no Borough Market.</div>
           </div>
         </div>
       </div>
@@ -906,29 +906,29 @@ footer{
     <div class="wrap">
       <h3 class="titulo">Must know</h3>
 
-      <!-- comidas típicas: placeholder pra preencher -->
+      <!-- comidas típicas -->
       <div class="card">
         <h4>🍽️ Comidas típicas</h4>
         <div class="foods">
           <div class="food">
             <img src="croissant.jpg" alt="Croissant" onerror="this.style.display='none'">
-            <button>Prato 1 <span class="seta">›</span></button>
-            <div class="desc">Descrição do prato — preencher.</div>
+            <button>Croissant maison doré <span class="seta">›</span></button>
+            <div class="desc">O clássico. Boulangerie de bairro (não do centro turístico) faz muito melhor. Manteiga real, folhado que estala.</div>
           </div>
           <div class="food">
-            <img src="prato-2-paris.jpg" alt="Prato 2" onerror="this.style.display='none'">
-            <button>Prato 2 <span class="seta">›</span></button>
-            <div class="desc">Descrição do prato — preencher.</div>
+            <img src="baguette.jpg" alt="Baguette" onerror="this.style.display='none'">
+            <button>Baguette <span class="seta">›</span></button>
+            <div class="desc">Pão francês oficial. Ideal comer no dia, crocante por fora e macia por dentro. Padaria de bairro > supermercado.</div>
           </div>
           <div class="food">
-            <img src="prato-3-paris.jpg" alt="Prato 3" onerror="this.style.display='none'">
-            <button>Prato 3 <span class="seta">›</span></button>
-            <div class="desc">Descrição do prato — preencher.</div>
+            <img src="macarons.jpg" alt="Macarons" onerror="this.style.display='none'">
+            <button>Macarons <span class="seta">›</span></button>
+            <div class="desc">Sanduichinho de merengue amêndoa com recheio. Pierre Hermé e Ladurée são referências, mas confeitarias de bairro também fazem bem.</div>
           </div>
           <div class="food">
-            <img src="prato-4-paris.jpg" alt="Prato 4" onerror="this.style.display='none'">
-            <button>Prato 4 <span class="seta">›</span></button>
-            <div class="desc">Descrição do prato — preencher.</div>
+            <img src="creme-brulee.jpg" alt="Crème brûlée" onerror="this.style.display='none'">
+            <button>Crème brûlée <span class="seta">›</span></button>
+            <div class="desc">Preciso comer o do <a href="https://www.cafedesdeuxmoulins.com/" target="_blank" rel="noopener">Café des Deux Moulins</a> da Amélie 🎬</div>
           </div>
         </div>
       </div>
@@ -1294,10 +1294,10 @@ function calcTotalCidade(cidade){
   renderTodosOsTotais();
 }
 
-// Formata "€120" ou "€100 a 130"
+// Formata "€120" sempre como valor único (média arredondada quando é range)
 function fmtValor(moeda, mi, ma){
-  const a = Math.round(mi), b = Math.round(ma);
-  return a === b ? `${moeda}${a}` : `${moeda}${a} a ${b}`;
+  const media = Math.round((mi + ma) / 2);
+  return `${moeda}${media}`;
 }
 
 // Renderiza o breakdown completo em cada #custo-total-<cidade>, destacando
