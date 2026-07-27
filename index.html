@@ -781,16 +781,19 @@ footer{
       <h3 class="titulo titulo-hostel"><a href="https://maps.google.com/?q=Hootananny+Hostel+95+Effra+Road+London+SW2+1DF" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 512 512" aria-hidden="true"><circle cx="256" cy="256" r="256" fill="#da9a44"/><path d="M256 100c-66 0-114 50-114 114 0 84 114 198 114 198s114-114 114-198c0-64-48-114-114-114z" fill="#fdf6ea"/><circle cx="256" cy="214" r="46" fill="#da9a44"/></svg>Hootananny Brixton</a></h3>
       <div class="hostel-info">
         <p>95 Effra Road, Brixton, London SW2 1DF, UK</p>
-        <p><strong>Check-in 15h | Check-out 10h</strong> · Recepção 24h</p>
+        <p><strong>Check-in 14h | Check-out 11h</strong> · Recepção 24h</p>
         <p style="margin-top:20px">🎵 Pub-clube com música ao vivo (reggae, ska, jazz).</p>
         <p>🚇 Zona 2 · Victoria line, ~10 min até Victoria Station.</p>
+        <p>🍳 Tem cozinha compartilhada.</p>
+        <p>💨 Tem secador de cabelo.</p>
+        <p>🧺 Máquina de lavar (paga).</p>
         <p>🎨 Brixton: Brixton Village (mercado veg), mural David Bowie, street art.</p>
         <p style="margin-top:20px"><strong>Mercados próximos:</strong></p>
         <div>
           <a class="tag" href="https://maps.google.com/?q=Sainsburys+Brixton" target="_blank" rel="noopener">Sainsbury's</a><a class="tag" href="https://maps.google.com/?q=Tesco+Brixton" target="_blank" rel="noopener">Tesco</a><a class="tag" href="https://maps.google.com/?q=Brixton+Village+Market" target="_blank" rel="noopener">Brixton Village</a>
         </div>
       </div>
-      <img class="foto-hostel" src="hootananny.jpg" alt="Hootananny Brixton" onerror="this.style.display='none'">
+      <img class="foto-hostel" src="Hootananny-Brixton.jpg" alt="Hootananny Brixton" onerror="this.style.display='none'">
     </div>
   </section>
 
@@ -828,9 +831,9 @@ footer{
       </div>
 
       <!-- transporte -->
-      <div class="card" id="transporte-londres">
+      <div class="card">
         <h4>🚌 Transporte</h4>
-        <p class="loading-dots">Carregando</p>
+        <div id="transporte-londres"><p class="loading-dots">Carregando</p></div>
       </div>
 
       <!-- resolver -->
@@ -883,13 +886,17 @@ footer{
   <!-- HOSTEL: painel verde-oliva de tela cheia -->
   <section class="painel-hostel">
     <div class="wrap">
-      <h3 class="titulo titulo-hostel"><a href="#" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 512 512" aria-hidden="true"><circle cx="256" cy="256" r="256" fill="#da9a44"/><path d="M256 100c-66 0-114 50-114 114 0 84 114 198 114 198s114-114 114-198c0-64-48-114-114-114z" fill="#fdf6ea"/><circle cx="256" cy="214" r="46" fill="#da9a44"/></svg>Hostel a definir</a></h3>
+      <h3 class="titulo titulo-hostel"><a href="https://www.booking.com/hotel/fr/hotelf1-paris-porte-de-chatillon-paris.pt-br.html" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 512 512" aria-hidden="true"><circle cx="256" cy="256" r="256" fill="#da9a44"/><path d="M256 100c-66 0-114 50-114 114 0 84 114 198 114 198s114-114 114-198c0-64-48-114-114-114z" fill="#fdf6ea"/><circle cx="256" cy="214" r="46" fill="#da9a44"/></svg>hotelF1 Paris Porte de Châtillon</a></h3>
       <div class="hostel-info">
-        <p>Endereço a preencher</p>
-        <p><strong>Check-in — | Check-out —</strong></p>
-        <p style="margin-top:20px">Informações do hostel a preencher.</p>
+        <p>21/23 Avenue de la Porte de Châtillon, 14º arr., 75014 Paris, França</p>
+        <p><strong>Check-in 14h | Check-out 12h</strong></p>
+        <p style="margin-top:20px">🚇 14º arrondissement, sul de Paris.</p>
+        <p style="margin-top:20px"><strong>Mercados próximos:</strong></p>
+        <div>
+          <a class="tag" href="https://maps.google.com/?q=Carrefour+Porte+de+Ch%C3%A2tillon+Paris" target="_blank" rel="noopener">Carrefour</a><a class="tag" href="https://maps.google.com/?q=Monoprix+Ch%C3%A2tillon+Paris" target="_blank" rel="noopener">Monoprix</a><a class="tag" href="https://maps.google.com/?q=Franprix+Ch%C3%A2tillon+Paris" target="_blank" rel="noopener">Franprix</a>
+        </div>
       </div>
-      <img class="foto-hostel" src="hostel-paris.jpg" alt="Hostel Paris" onerror="this.style.display='none'">
+      <img class="foto-hostel" src="hotelF1.jpg" alt="hotelF1 Paris Porte de Châtillon" onerror="this.style.display='none'">
     </div>
   </section>
 
@@ -927,9 +934,9 @@ footer{
       </div>
 
       <!-- transporte -->
-      <div class="card" id="transporte-paris">
+      <div class="card">
         <h4>🚌 Transporte</h4>
-        <p class="loading-dots">Carregando</p>
+        <div id="transporte-paris"><p class="loading-dots">Carregando</p></div>
       </div>
 
       <!-- resolver -->
@@ -1024,9 +1031,11 @@ function csvParaObjetos(txt){
   }).filter(o => Object.values(o).some(v => v));
 }
 
-// Converte marcadores [texto](url) em <a>. Assume que txt já passou por esc().
+// Converte marcadores [texto](url) em <a> e **texto** em <strong>. Assume que txt já passou por esc().
 function inlineLinks(txt){
-  return txt.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+  return txt
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
 }
 
 // Monta um <p> de Salvos com até 2 links
