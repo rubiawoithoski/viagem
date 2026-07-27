@@ -808,22 +808,22 @@ footer{
         <h4>🍽️ Comidas típicas</h4>
         <div class="foods">
           <div class="food">
-            <img src="fish-and-chips.jpg" alt="Fish and Chips" onerror="this.style.display='none'">
+            <img src="fishandchips.jpg" alt="Fish and Chips" onerror="this.style.display='none'">
             <button>Fish and Chips <span class="seta">›</span></button>
             <div class="desc">Peixe empanado + batata frita grossa, com molho tártaro e ervilhas amassadas. A versão veg usa banana blossom, tofu ou seitan. Unity Diner é famoso pelo deles.</div>
           </div>
           <div class="food">
-            <img src="english-breakfast.jpg" alt="English Breakfast" onerror="this.style.display='none'">
+            <img src="vegetarian-english-breakfast.jpg" alt="English Breakfast" onerror="this.style.display='none'">
             <button>English Breakfast <span class="seta">›</span></button>
             <div class="desc">Feijão, ovo, cogumelo, tomate, salsicha, torrada, hash brown. Café da manhã que segura o dia todo.</div>
           </div>
           <div class="food">
-            <img src="afternoon-tea.jpg" alt="Afternoon Tea" onerror="this.style.display='none'">
+            <img src="creamtea.jpeg" alt="Cream Tea" onerror="this.style.display='none'">
             <button>Cream Tea / Afternoon Tea <span class="seta">›</span></button>
             <div class="desc">Chá + scones com clotted cream + geléia. A cerimônia inteira leva ~2h.</div>
           </div>
           <div class="food">
-            <img src="humble-crumble.jpg" alt="Humble Crumble" onerror="this.style.display='none'">
+            <img src="humblecrumble.jpeg" alt="Humble Crumble" onerror="this.style.display='none'">
             <button>Humble Crumble <span class="seta">›</span></button>
             <div class="desc">Crumble de maçã com custard quente e casca de açúcar queimada no maçarico, igual crème brûlée. £7 a 10 · barraca no Borough Market.</div>
           </div>
@@ -987,7 +987,7 @@ const SHEETS = {
   lisboa: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQeR8SyKPjwgtfgmu1djrhu6JLLryiv7Ng5izrKu1Xu2GuTxkmD2g9ZEudNSn4TDH1jSeE9hANgkDX8/pub?gid=475471856&single=true&output=csv',
   porto: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQeR8SyKPjwgtfgmu1djrhu6JLLryiv7Ng5izrKu1Xu2GuTxkmD2g9ZEudNSn4TDH1jSeE9hANgkDX8/pub?gid=66682512&single=true&output=csv',
   londres: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQeR8SyKPjwgtfgmu1djrhu6JLLryiv7Ng5izrKu1Xu2GuTxkmD2g9ZEudNSn4TDH1jSeE9hANgkDX8/pub?gid=2051310306&single=true&output=csv',
-  paris: '',
+  paris: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQeR8SyKPjwgtfgmu1djrhu6JLLryiv7Ng5izrKu1Xu2GuTxkmD2g9ZEudNSn4TDH1jSeE9hANgkDX8/pub?gid=112060361&single=true&output=csv',
 };
 
 // Escapa texto pra HTML seguro
@@ -1186,8 +1186,8 @@ function montarInfoCard(itens, containerId){
     const texto = it.texto || it.valor || '';
     const link = it.link || '';
     const conteudo = link
-      ? `<a href="${esc(link)}" target="_blank" rel="noopener">${esc(texto).replace(/\n/g,'<br>')}</a>`
-      : esc(texto).replace(/\n/g,'<br>').replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+      ? `<a href="${esc(link)}" target="_blank" rel="noopener">${inlineLinks(esc(texto)).replace(/\n/g,'<br>')}</a>`
+      : inlineLinks(esc(texto)).replace(/\n/g,'<br>');
     return `<p>${conteudo}</p>`;
   }).join('');
   el.innerHTML = html;
